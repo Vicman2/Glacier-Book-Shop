@@ -1,0 +1,31 @@
+.NavBar_Dark, .NavBar_Bright{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: auto 15px;
+}
+
+.NavBar_Dark{
+    background-color: #000000;
+}
+.Nav_Search_Input{
+    display: none;
+}
+.NavBar_Bright{
+    background-color: #ffffff;
+}
+.Nav_Auth{
+    display: flex;
+    
+}
+
+.profile-Icon ion-icon{
+    color: #ffffff;
+    font-size: 24px;
+}
+
+@media(min-width: 800px){
+    .Nav_Search_Input{
+        display: block;
+    }
+}

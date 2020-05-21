@@ -1,0 +1,35 @@
+.SearchInput{
+    position: relative;
+    width: 200px;
+}
+.SearchInput ion-icon{
+    padding: 2px;
+    position: absolute;
+    left: 2px;
+    top: 8px;
+    color: white;
+    font-size: 16px;
+}
+.SearchInput button{
+    position: absolute;
+    right: 1px;
+    padding: 1px;
+    top: 8px;
+    background-color: #228FC0;
+    color: black;
+    outline: none;
+    border: 1px solid #228FC0;
+    border-radius: 20px;
+}
+.SearchInput input{
+    width: 178px;
+    margin: 8px 2px;
+    padding-left: 20px;
+    outline: none;
+    font-family: inherit;
+    border-radius: 10px;
+    height: 18px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}

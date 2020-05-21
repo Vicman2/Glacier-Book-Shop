@@ -1,0 +1,71 @@
+.Footer_Dark, .Footer_Bright{
+    font-weight: lighter;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    bottom: 0;
+    position: absolute;
+    width: 100vw;
+    font-weight: 300;
+    list-style: none;
+    z-index: 190;
+}
+.Footer_Dark li, .Footer_Bright li{
+    margin: auto 4px;
+}
+
+.Footer_Dark ul, .Footer_Bright ul{
+    margin: 4px auto;
+    list-style: none;
+}
+.Footer_Logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 20px;
+}
+.Footer_Logo img{
+    width: 100%;
+    height: 100%;
+}
+.Footer_Norm{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.Footer_Norm li{
+    margin: 7px auto;
+}
+.Footer_Abnorm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Footer_Dark{
+    background-color: #000000;
+    color: #E5E5E5
+}
+.Footer_Bright{
+    background-color: #E5E5E5;
+}
+
+@media(min-width: 800px){
+    .Footer_Dark, .Footer_Bright{
+        align-items: center;
+        flex-direction: column;
+    }
+    .Footer_Norm li{
+        border-right: 2px solid #E5E5E5;
+        padding: 0 15px;
+    }
+    .Footer_Norm{
+        flex-direction: row;
+    }
+    .Footer_Abnorm{
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,14 @@
+.NavItems{
+    display: none;
+    color: #ffffff;
+    list-style: none;
+    margin: auto 15px;
+}
+
+@media(min-width:800px){
+    .NavItems{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,27 @@
+.Button_Dark, .Button_Bright{
+    cursor: pointer;
+    border: 1px solid #228FC0;
+    outline: none;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 50px;
+    font-weight: bolder;
+    letter-spacing: 1.5px;
+    font-size: 15px;
+    margin: auto 5px;
+    font-family: 'Roboto';
+}
+
+.Button_Dark{
+    background-color: #000000;
+}
+.Button_Dark:hover{
+    background-color: #228FC0;
+}
+
+.Button_Bright{
+    background-color: #228FC0;
+}
+.Button_Bright:hover{
+    background-color: #000000;
+}

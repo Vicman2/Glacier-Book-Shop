@@ -1,0 +1,13 @@
+.ErrorMessage{
+    font-weight: lighter;
+    color: red;
+    text-align: center;
+    font-weight: 500;
+    font-family: "Roboto";
+}
+.Hide__Error{
+    display: none;
+}
+.Show__Error{
+    display: block;
+}
