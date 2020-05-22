@@ -25,19 +25,21 @@ const BookSides = (props) => {
           items: 1,
         },
       };
+      const books = props.booksToSlide.map(book => (
+        <BookSlide
+        key={book._id}
+        quote="Legends can only convey their knowledge through a book "
+        name={book.title}
+        imageUrl={book.imageUrl}
+        />
+      ))
+
     return (
         <Aux>
             <div className="BookSides">
             <section className="Lists">
                 <Carousel responsive={responsive} autoPlay infinite>
-                    <BookSlide 
-                    name="The Power of the brain"
-                    quote= "Legends can only convey their knowledge through a book"
-                    />
-                    <BookSlide 
-                    name="Killing_Heminging"
-                    quote="The brain is unique if you feed it reachly with great books"
-                    />
+                   {books}
                 </Carousel>
             </section>
             </div>

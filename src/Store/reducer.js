@@ -3,6 +3,7 @@ import * as actionTypes from './actions'
 const initialStore = {
     isLoggedIn : false,
     token: null,
+    bookImageEndpoint: 'http://localhost:5000/api/books/'
 }
 
 

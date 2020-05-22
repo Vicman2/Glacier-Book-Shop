@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 const NavBar = (props) => {
     const className = props.mode === "dark" ? "NavBar_Dark" : "NavBar_Bright"; 
     let Auth = null
-    console.log(props.isLoggedIn)
     if(props.isLoggedIn){
         Auth = <div className="profile-Icon">
             <ion-icon name="person"></ion-icon>

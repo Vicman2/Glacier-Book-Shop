@@ -36,7 +36,7 @@ class App extends Component{
   }
   render(){
     return(
-      <Aux>
+      <div className="App">
         <NavBar 
         mode="dark"
         clickedSignIn={this.signInHandler}
@@ -54,7 +54,7 @@ class App extends Component{
             <Route path="/" component={Home} />
           </Switch>
         <Footer mode="dark"/>
-      </Aux>
+      </div>
     )
   }
 }
