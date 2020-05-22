@@ -1,0 +1,42 @@
+.BookInHome{
+    padding-top: 0;
+    width:140px;
+    margin: 4px 10px;
+    max-height: 250px;
+}
+
+.BookInHome_Image_Container{
+    width: 100%;
+    height: 200px;
+}
+.BookInHome_Image_Container img{
+    width: 100%;
+    height: 100%;
+}
+
+.BookInHome_Detail{
+    background-color: white;
+    color: #000000;
+}
+.BookInHome_Title{
+    font-size: 12px;
+}
+.BookInHome_Author{
+    font-size: 8px;
+}
+.BookInHome_Detail p{
+    padding: 5px 0;
+    margin: 0;
+}
+
+@media(min-width: 800px){
+    .BookInHome{
+        width:150px ;
+    }
+    .BookInHome_Title{
+        font-size: 15px;
+    }
+    .BookInHome_Author{
+        font-size: 10px;
+    }
+}

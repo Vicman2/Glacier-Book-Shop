@@ -3,3 +3,10 @@
     mix-blend-mode: normal;
     color: white;
 }
+.Our_Books{
+    background-color: #000000;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+}
