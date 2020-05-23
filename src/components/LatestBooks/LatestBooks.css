@@ -1,0 +1,25 @@
+.Latest{
+    background-color: #000000;
+    padding-bottom: 40px;
+    padding-top: 10px;
+}
+.LatestBooks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #000000;
+   
+}
+.LatestBooks_Book_Text{
+    padding-left: 10px;
+    background-color: #000000;
+    color: white;
+}
+.LatestBooks_Book_Release{
+    font-size: 20px;
+    font-weight: 500;
+}
+.LatestBooks_Book_Quote{
+    font-size: 15px;
+}

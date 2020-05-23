@@ -10,6 +10,7 @@ import SignIn from './container/Authentication/SignIn/SignIn';
 import Login from './container/Authentication/Login/Login';
 import * as actionCreators from './Store/actions'
 import { getInLocalStorage } from './Util/localStorage';
+import Preview from './container/Preview/Preview';
 
 class App extends Component{
   constructor(props){
@@ -52,6 +53,7 @@ class App extends Component{
          />
           <Switch>
             <Route path="/" component={Home} />
+            <Route path="/product/id" component={Preview} />
           </Switch>
         <Footer mode="dark"/>
       </div>

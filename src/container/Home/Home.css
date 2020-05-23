@@ -2,11 +2,62 @@
     background:  #000000;
     mix-blend-mode: normal;
     color: white;
+    padding: 11px;
+
 }
-.Our_Books{
-    background-color: #000000;
+.Category_Title{
+    font-size: 23px;
+    font-weight: 400;
+}
+.Individual_Categories{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: 400;
+}
+.Individual_Categories div{
+    width: 180px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Individual_Categories div:hover{
+    width: 190px;
+    cursor: pointer;
+}
+#Science_Fiction{
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('./Assets/Science_Fiction.jpeg');
+    background-position: center;
+    background-size: contain;
+}
+#Fantasy{
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('./Assets/Fantasy.jpeg');
+    background-position: center;
+    background-size: contain;
+}
+#Cooking{
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('./Assets/Cooking.jpeg');
+    background-position: center;
+    background-size: contain;
+}
+#Business{
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.7)),url('./Assets/Business.jpg');
+    background-position: center;
+    background-size: contain;
+}
+.Our_Books{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+    padding-bottom: 40px;
+}
+.Books_ForSale{
+    background-color: #000000;
+    color: white;
+}
+.Pre_Book_Text{
     padding: 10px 20px;
 }

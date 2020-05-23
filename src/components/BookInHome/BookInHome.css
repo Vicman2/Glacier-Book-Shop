@@ -4,6 +4,10 @@
     margin: 4px 10px;
     max-height: 250px;
 }
+.BookInHome:hover{
+    width:145px;
+    cursor: pointer;
+}
 
 .BookInHome_Image_Container{
     width: 100%;
@@ -15,6 +19,7 @@
 }
 
 .BookInHome_Detail{
+    padding-left: 3px;
     background-color: white;
     color: #000000;
 }
@@ -32,6 +37,10 @@
 @media(min-width: 800px){
     .BookInHome{
         width:150px ;
+    }
+    .BookInHome:hover{
+        width:155px;
+        cursor: pointer;
     }
     .BookInHome_Title{
         font-size: 15px;

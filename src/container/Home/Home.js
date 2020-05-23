@@ -6,6 +6,7 @@ import BookSides from '../../components/BookSlides/BookSlides'
 import { graphql } from 'react-apollo'
 import BookCards from '../../components/BookCards/BookCards'
 import BookInHome from '../../components/BookInHome/BookInHome'
+import LatestBooks from '../../components/LatestBooks/LatestBooks'
 
 class Home extends Component{
     constructor(props){
@@ -47,14 +48,32 @@ class Home extends Component{
                 <BookSides booksToSlide={booksToSlide}/>
                 <BookCards books={booksForCard} />
                 <div className="Category">
-                    <p>Category</p>
-                    <div className="Category_Image_Container">
-                       <h1>  </h1>
+                    <p className="Category_Title">Category</p>
+                    <div className="Individual_Categories">
+                        <div id="Science_Fiction">
+                            <p>Science Fiction</p>
+                        </div>
+                        <div id="Fantasy">
+                            <p>Fantasy</p>
+                        </div>
+                        <div id="Cooking">
+                            <p>Cooking</p>
+                        </div>
+                        <div id="Business">
+                            <p>Business</p>
+                        </div>
                     </div>
                 </div>
-                <div className="Our_Books">
-                    {booksToDisplay}
+                <div className="Books_ForSale">
+                    <div className="Pre_Book_Text">
+                        <p>INTERESETING BOOKS THIS SEASON</p>
+                        <p className="BookInHome_Title">Checkout what's NEW and what everyone else is READING!</p>
+                    </div>
+                    <div className="Our_Books">
+                        {booksToDisplay}
+                    </div>
                 </div>
+                <LatestBooks />
             </Aux>
         )
     }
