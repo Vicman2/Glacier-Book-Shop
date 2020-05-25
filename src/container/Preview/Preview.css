@@ -1,0 +1,110 @@
+.Preview{
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.Preview_ImageContainer_Review{
+    width: 200px;
+    height: 270px;
+}
+.Preview_ImageContainer_Review img{
+    width: 100%;
+    height: 100%;
+}
+.Preview_Text_Details{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: left;
+}
+.Preview_BookTitle{
+    padding-bottom: 1px;
+    margin-bottom: 2px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.Preview_AuthorName{
+    font-size: 12px;
+    padding: 4px 0;
+    margin: 2px 0;
+}
+.Preview_Rating p{
+    margin: 2px 0
+}
+.Preview_Rating ion-icon{
+    color: #FFF50D;
+}
+.Preview_ButtonWrapper{
+    display: flex;
+}
+.Preview_Description_Title{
+    font-size: 20px;
+    font-weight: bold;
+}
+.Preview_Desciption{
+    width: 90%
+}
+.Product_Detail_Title{
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+.Preview_Details{
+    display: flex;
+}
+.Detail_Value{
+    margin-left: 10px;
+}
+.Preview_About_The_Author{
+    font-size: 20px;
+    font-weight: bold;
+}
+.Preview_Author_Image_Container{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding-right: 12px;
+}
+.Preview_Author_Image_Container img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.Preview_Author_Details{
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+}
+.Preview_Author_Details p{
+    margin: 2px auto;
+    font-size: 14px;
+}
+
+@media(min-width: 800px){
+    .Preview{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 50px;
+    }
+    .Preview_Desciption{
+        width: 50%
+    }
+    .Preview_ImageContainer_Review{
+        margin-right: 30px;
+    }
+    .Preview_Text_Details{
+        display: block;
+    }
+    .Preview_Author_Details{
+        justify-content: flex-start;
+    }
+}

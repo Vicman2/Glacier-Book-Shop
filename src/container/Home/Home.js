@@ -20,6 +20,9 @@ class Home extends Component{
            this.setState({books :this.props.data.getBooks }) 
         }
     }
+    goToPreview = (id) => {
+        this.props.history.push(`/product/${id}`)
+    }
     render(){
         let booksToSlide = [];
         let booksForCard = [];
@@ -34,6 +37,7 @@ class Home extends Component{
             booksToDisplay =  this.state.books.map((book,index) => {
                 return(
                     <BookInHome
+                        clicked={() => this.goToPreview(book._id)}
                         key={book._id}
                         imageUrl={book.imageUrl}
                         title={book.title}

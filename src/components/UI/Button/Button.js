@@ -4,10 +4,13 @@ import "./Button.css"
 
 const Button = (props) => {
    const  className= props.mode === "dark" ? "Button_Dark" : "Button_Bright"
+   const icon = props.iconName ? <ion-icon name={props.iconName}></ion-icon> : null
     return (
         <Aux>
             <div className="Button">
-                <button className={className} onClick={props.clicked}>{props.name}</button>
+                <button className={className} onClick={props.clicked}>
+                    {icon} 
+                    {props.name}</button>
             </div>
         </Aux>
     )

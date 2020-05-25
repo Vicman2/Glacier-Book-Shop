@@ -6,9 +6,8 @@ import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 
 const BookInHome = (props) => {
     const src = props.imageEndPoint + props.imageUrl
-  
     return(
-        <div className="BookInHome">
+        <div className="BookInHome" onClick={props.clicked}>
             <section className="BookInHome_Image_Container">
                 <img src={src} alt="" />
             </section>

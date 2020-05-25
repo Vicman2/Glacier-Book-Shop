@@ -1,7 +1,6 @@
 import React from 'react' 
 import './BookSlide.css'
 import Aux from '../../../HOC/Aux'
-import oneBook from '../../../bookish/Killing_Hemingway.png'
 import { connect } from 'react-redux'
 
 

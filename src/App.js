@@ -52,8 +52,8 @@ class App extends Component{
          cancel={this.logInHandler}
          />
           <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/product/id" component={Preview} />
+            <Route path="/" exact component={Home} />
+            <Route path="/product/:id" component={Preview} />
           </Switch>
         <Footer mode="dark"/>
       </div>
