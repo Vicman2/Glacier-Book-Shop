@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import './LatestBooks.css'
 import { graphql } from 'react-apollo'
 import LatestBook from './LatestBook/LatestBook'
-import Aux from '../../HOC/Aux'
-
 
 const LatestBooks = (props) => {
 

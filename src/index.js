@@ -14,11 +14,12 @@ import * as serviceWorker from './serviceWorker';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: 'http://localhost:5000/graphql/', 
+  uri: 'http://localhost:5000/graphql/',
   credentials: 'include'
 })
 
 const client = new ApolloClient({
+  dataIdFromObject: o => o.id,
   cache, 
   link
 })
@@ -26,13 +27,13 @@ const client = new ApolloClient({
 const store = createStore(reducer);
 
 const app = <React.StrictMode>
-              <ApolloProvider client={client}>
-                <Provider store={store}>
-                  <BrowserRouter>
-                    <App />
-                  </BrowserRouter>
-                </Provider>
-              </ApolloProvider>
+              <BrowserRouter>
+                <ApolloProvider client={client}>
+                  <Provider store={store}>
+                      <App />
+                  </Provider>
+                </ApolloProvider>
+              </BrowserRouter>
             </React.StrictMode>
 
 ReactDOM.render(app, document.getElementById('root'));

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom'
+import dotenv from 'dotenv'
 import {connect} from 'react-redux'
-import Aux from './HOC/Aux'
 import './App.css';
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
@@ -11,6 +11,7 @@ import Login from './container/Authentication/Login/Login';
 import * as actionCreators from './Store/actions'
 import { getInLocalStorage } from './Util/localStorage';
 import Preview from './container/Preview/Preview';
+import CheckoutSingleBook from './container/Checkout/CheckoutSingleBook/CheckoutSingleBook';
 
 class App extends Component{
   constructor(props){
@@ -21,8 +22,10 @@ class App extends Component{
     }
   }
   componentDidMount(){
+    dotenv.config()
     const token = getInLocalStorage("token")
     if(token) this.props.login(token);
+    
   }
   
   signInHandler =()=>{
@@ -52,8 +55,9 @@ class App extends Component{
          cancel={this.logInHandler}
          />
           <Switch>
-            <Route path="/" exact component={Home} />
             <Route path="/product/:id" component={Preview} />
+            <Route path="/checkout" component={CheckoutSingleBook} />
+            <Route path="/" exact component={Home} />
           </Switch>
         <Footer mode="dark"/>
       </div>
@@ -63,7 +67,8 @@ class App extends Component{
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.isLoggedIn,
+    cart: state.cart
   }
 }
 

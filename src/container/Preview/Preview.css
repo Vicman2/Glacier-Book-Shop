@@ -26,6 +26,7 @@
 }
 .Preview_BookTitle{
     padding-bottom: 1px;
+    margin-top: 2px;
     margin-bottom: 2px;
     font-weight: bold;
     font-size: 20px;
@@ -89,18 +90,18 @@
 
 @media(min-width: 800px){
     .Preview{
-        display: flex;
+        width: 100%;
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
         padding-top: 50px;
     }
     .Preview_Desciption{
-        width: 50%
+        width: 400px
     }
     .Preview_ImageContainer_Review{
         margin-right: 30px;
-    }
+    } 
     .Preview_Text_Details{
         display: block;
     }

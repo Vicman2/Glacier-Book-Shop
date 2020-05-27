@@ -17,7 +17,12 @@ class Home extends Component{
     }
     componentDidUpdate(prevProps, prevState){
         if(prevProps.data.getBooks !== this.props.data.getBooks){
-           this.setState({books :this.props.data.getBooks }) 
+           this.setState({books :this.props.data.getBooks })
+        }
+    }
+    componentDidMount(){
+        if(this.props.data.getBooks){
+            this.setState({books : this.props.data.getBooks})
         }
     }
     goToPreview = (id) => {
@@ -26,14 +31,12 @@ class Home extends Component{
     render(){
         let booksToSlide = [];
         let booksForCard = [];
-        let totalBook = []
         let booksToDisplay = <div></div>;
         if(!this.props.data.loading){
             booksToSlide = this.state.books.filter((book, index) => index <15)
             booksToSlide = booksToSlide.reverse()
             booksForCard= this.state.books.filter((book, index) => index > 3 && index <=6)
             booksForCard = booksForCard.reverse()
-            totalBook = [...this.state.books];
             booksToDisplay =  this.state.books.map((book,index) => {
                 return(
                     <BookInHome

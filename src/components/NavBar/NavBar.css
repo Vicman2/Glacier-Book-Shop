@@ -27,9 +27,29 @@
     color: #ffffff;
     font-size: 24px;
 }
+.CartBox{
+    color: white;
+    position: relative;
+}
+.CartBox ion-icon{
+    z-index: -1 !important;
+}
+.Cart_Number{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    z-index: 100 !important;
+    color:#228FC0 ;
+}
 
 @media(min-width: 800px){
     .Nav_Search_Input{
         display: block;
+    }
+    .CartBox{
+        display: none;
     }
 }

@@ -33,6 +33,10 @@ const NavBar = (props) => {
                 <div className="Nav_Auth">
                     {Auth}
                 </div>
+                <div className="CartBox">
+                    <ion-icon name="cart"></ion-icon>
+                    <span className="Cart_Number">2</span>
+                </div>
             </div>
         </Aux>
     )

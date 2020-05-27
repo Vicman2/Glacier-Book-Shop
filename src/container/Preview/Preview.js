@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {usePaystackPayment, PaystackButton, PaystackConsumer} from 'react-paystack'
 import gql from 'graphql-tag'
 import './Preview.css'
 import { graphql } from 'react-apollo'
@@ -6,6 +7,7 @@ import bookImage from '../Home/Assets/Cooking.jpeg'
 import { connect } from 'react-redux'
 import Button from '../../components/UI/Button/Button'
 import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
+import * as actionTypes from '../../Store/actions'
 import Aux from '../../HOC/Aux'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
 
@@ -13,8 +15,24 @@ class Preview extends Component{
     constructor(props){
         super(props)
     }
+
+    addToCart = (id) =>{
+        this.props.addToCart(id);
+    }
+    buyBook = () => {
+        this.props.history.push('/checkout');
+    }
     render(){
         const book = {...this.props.data.getBook}
+        const config = {
+            reference : (new Date()).getTime(), 
+            email: process.env.REACT_APP_RECIPIENT_EMAIL,
+            amount: book.price * 100, 
+            publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+            text: 'Buy Now',
+            onSuccess: () => this.props.history.push('/'),
+            onClose: () => null
+        }
         let src = ""
         if(!this.props.data.loading){
             src = this.props.imageEndpoint + book.imageUrl
@@ -37,8 +55,10 @@ class Preview extends Component{
                         </p>
                         <p>${book.price} </p>
                         <div className="Preview_ButtonWrapper">
-                            <Button name="Buy now" />
-                            <Button name="Add To Cart" mode="dark" iconName="cart"/>
+                            <PaystackConsumer {...config} >
+                                {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
+                            </PaystackConsumer>
+                            <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
                         </div>
                         <p className="Preview_Description_Title">Description</p>
                         <p className="Preview_Desciption"> {book.description} </p>
@@ -108,6 +128,12 @@ const stateMapedToProps = (state)=> {
     }
 }
 
-export default connect(stateMapedToProps) (graphql(query, {
+const actionsMappedToProps = dispatch => {
+    return {
+        addToCart : (id) => dispatch(actionTypes.addToCart(id))
+    }
+}
+
+export default connect(stateMapedToProps, actionsMappedToProps) (graphql(query, {
     options : (props) => ({ variables : { id: props.match.params.id}})
 }) (Preview))
