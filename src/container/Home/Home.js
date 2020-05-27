@@ -7,6 +7,7 @@ import { graphql } from 'react-apollo'
 import BookCards from '../../components/BookCards/BookCards'
 import BookInHome from '../../components/BookInHome/BookInHome'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
+import CheckAuth from '../../components/CheckAuth/CheckAuth'
 
 class Home extends Component{
     constructor(props){
@@ -52,6 +53,7 @@ class Home extends Component{
 
         return(
             <Aux>
+                {/* <CheckAuth show/> */}
                 <BookSides booksToSlide={booksToSlide}/>
                 <BookCards books={booksForCard} />
                 <div className="Category">

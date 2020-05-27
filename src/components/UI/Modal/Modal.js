@@ -26,11 +26,20 @@ const Modal = (props) => {
     }else{
        bt2 =  <Button clicked={props.onClickButton2} name={props.button2Name} />
     }
+    let showCloseIcon = null
+    if(props.clicked) {
+        showCloseIcon = <div className="Model_Close">
+            <div>
+                <ion-icon name="close" onClick={props.clicked}></ion-icon>
+            </div>
+        </div>
+    }
     return(
         <Aux>
-            <Backdrop toggled={showModal} clicked={props.clicked}/>
-            <section className={classes.join(" ")}>
+            <Backdrop toggled={showModal} />
+            <section onClick={props.clicked} className={classes.join(" ")}>
                 <div className="Modal_Content">
+                    {showCloseIcon}
                     <div className="Modal_Header">
                         <p>{props.title} </p>
                     </div>

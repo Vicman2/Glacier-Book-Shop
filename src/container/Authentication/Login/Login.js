@@ -159,6 +159,7 @@ class Login extends Component{
             button1Name="cancel"
             button2Name="Login"
             show={this.props.show}
+            cancel={this.props.cancel}
             onClickButton1={this.props.cancel}
             onClickButton2={this.onSubmitHandler}
             loading2={this.state.loading}

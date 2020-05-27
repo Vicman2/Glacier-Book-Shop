@@ -190,6 +190,7 @@ class SignIn extends Component{
             button1Name="cancel"
             button2Name="Sign Up"
             show={this.props.show}
+            clicked={this.props.cancel}
             onClickButton1={this.props.cancel}
             onClickButton2={this.onSubmitHandler}
             loading2={this.state.loading}

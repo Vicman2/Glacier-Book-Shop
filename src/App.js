@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom'
-import dotenv from 'dotenv'
 import {connect} from 'react-redux'
 import './App.css';
 import Footer from './components/Footer/Footer';
@@ -12,6 +11,7 @@ import * as actionCreators from './Store/actions'
 import { getInLocalStorage } from './Util/localStorage';
 import Preview from './container/Preview/Preview';
 import CheckoutSingleBook from './container/Checkout/CheckoutSingleBook/CheckoutSingleBook';
+import CheckAuth from './components/CheckAuth/CheckAuth';
 
 class App extends Component{
   constructor(props){
@@ -19,13 +19,12 @@ class App extends Component{
     this.state = {
       clickedSignIn: false, 
       clickedLogin:false,
+      checkAuth: false
     }
   }
   componentDidMount(){
-    dotenv.config()
     const token = getInLocalStorage("token")
     if(token) this.props.login(token);
-    
   }
   
   signInHandler =()=>{
@@ -39,6 +38,7 @@ class App extends Component{
     })
   }
   render(){
+    console.log(this.state.clickedLogin)
     return(
       <div className="App">
         <NavBar 
@@ -54,6 +54,12 @@ class App extends Component{
          show={this.state.clickedLogin}
          cancel={this.logInHandler}
          />
+         <CheckAuth
+          show ={this.props.showAuth}
+          cancel={this.props.cancelAuth}
+          clickedSignIn= {this.signInHandler}
+          clickedLogIn={this.logInHandler}
+          />
           <Switch>
             <Route path="/product/:id" component={Preview} />
             <Route path="/checkout" component={CheckoutSingleBook} />
@@ -68,13 +74,15 @@ class App extends Component{
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
-    cart: state.cart
+    cart: state.cart,
+    showAuth: state.showAuth
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    login : (token) => dispatch(actionCreators.login(token))
+    login : (token) => dispatch(actionCreators.login(token)),
+    cancelAuth: () => dispatch(actionCreators.cancelAuth())
   }
 }
 

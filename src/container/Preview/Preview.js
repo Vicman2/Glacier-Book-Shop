@@ -10,35 +10,45 @@ import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 import * as actionTypes from '../../Store/actions'
 import Aux from '../../HOC/Aux'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
+import CheckAuth from '../../components/CheckAuth/CheckAuth'
 
 class Preview extends Component{
     constructor(props){
-        super(props)
+        super(props)   
     }
 
     addToCart = (id) =>{
         this.props.addToCart(id);
     }
-    buyBook = () => {
-        this.props.history.push('/checkout');
+    buyBook = (id) => {
+        this.props.addToCart(id);
+        if(!this.props.isLoggedIn){
+            this.props.showAuth()
+        }else{
+            this.props.history.push('/checkout');
+        }
+    }
+    cancelCheckAuth = ()=> {
+        this.setState({showCheckAuth : false})
     }
     render(){
         const book = {...this.props.data.getBook}
-        const config = {
-            reference : (new Date()).getTime(), 
-            email: process.env.REACT_APP_RECIPIENT_EMAIL,
-            amount: book.price * 100, 
-            publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
-            text: 'Buy Now',
-            onSuccess: () => this.props.history.push('/'),
-            onClose: () => null
-        }
+        // const config = {
+        //     reference : (new Date()).getTime(), 
+        //     email: process.env.REACT_APP_RECIPIENT_EMAIL,
+        //     amount: book.price * 100, 
+        //     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+        //     text: 'Buy Now',
+        //     onSuccess: () => this.props.history.push('/'),
+        //     onClose: () => null
+        // }
         let src = ""
         if(!this.props.data.loading){
             src = this.props.imageEndpoint + book.imageUrl
         }
         return(
             <Aux>
+                
                 <div className="Preview">
                     <div className="Preview_ImageContainer_Review"> 
                         <img src={src} alt="" />
@@ -55,9 +65,10 @@ class Preview extends Component{
                         </p>
                         <p>${book.price} </p>
                         <div className="Preview_ButtonWrapper">
-                            <PaystackConsumer {...config} >
+                            {/* <PaystackConsumer {...config} >
                                 {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
-                            </PaystackConsumer>
+                            </PaystackConsumer> */}
+                            <Button name="Buy Now" clicked={() => this.buyBook(book.price)} />
                             <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
                         </div>
                         <p className="Preview_Description_Title">Description</p>
@@ -124,13 +135,15 @@ const query = gql`
 `
 const stateMapedToProps = (state)=> {
     return {
+        isLoggedIn: state.isLoggedIn,
         imageEndpoint: state.bookImageEndpoint
     }
 }
 
 const actionsMappedToProps = dispatch => {
     return {
-        addToCart : (id) => dispatch(actionTypes.addToCart(id))
+        addToCart : (id) => dispatch(actionTypes.addToCart(id)),
+        showAuth : () => dispatch(actionTypes.showAuth())
     }
 }
 
