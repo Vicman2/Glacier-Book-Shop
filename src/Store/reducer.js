@@ -5,7 +5,12 @@ const initialStore = {
     token: null,
     bookImageEndpoint: 'http://localhost:5000/api/books/', 
     cart: [],
-    showAuth: false
+    showAuth: false, 
+    showNotification: false,
+    notification: {
+        content: "",
+        status: "primary"
+    },
 }
 
 
@@ -33,6 +38,21 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state, 
                 showAuth: false
+            }
+        case actionTypes.SHOW_NOTIFICATION: 
+            return{
+                ...state, 
+                showNotification: true,
+                notification: {
+                    ...state.notification,
+                    content: action.payload.content,
+                    status: action.payload.status
+                }
+            }
+        case actionTypes.CANCEL_NOTIFICATION: 
+            return{
+                ...state,
+                showNotification: false
             }
     }
     return state

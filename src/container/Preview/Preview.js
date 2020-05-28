@@ -10,7 +10,6 @@ import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 import * as actionTypes from '../../Store/actions'
 import Aux from '../../HOC/Aux'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
-import CheckAuth from '../../components/CheckAuth/CheckAuth'
 
 class Preview extends Component{
     constructor(props){
@@ -18,7 +17,19 @@ class Preview extends Component{
     }
 
     addToCart = (id) =>{
-        this.props.addToCart(id);
+        const exist = this.props.cart.find(prodId => prodId === id)
+        if(exist){
+            this.props.showCartNotification({
+                status: "primary", 
+                content: "Book is in cart already"
+            })
+        }else{
+            this.props.addToCart(id);
+            this.props.showCartNotification({
+                status: "success", 
+                content: "Book have been added to cart successfully"
+            })
+        }
     }
     buyBook = (id) => {
         this.props.addToCart(id);
@@ -136,14 +147,16 @@ const query = gql`
 const stateMapedToProps = (state)=> {
     return {
         isLoggedIn: state.isLoggedIn,
-        imageEndpoint: state.bookImageEndpoint
+        imageEndpoint: state.bookImageEndpoint,
+        cart: state.cart
     }
 }
 
 const actionsMappedToProps = dispatch => {
     return {
         addToCart : (id) => dispatch(actionTypes.addToCart(id)),
-        showAuth : () => dispatch(actionTypes.showAuth())
+        showAuth : () => dispatch(actionTypes.showAuth()),
+        showCartNotification: (payload) => dispatch(actionTypes.showNotification(payload))
     }
 }
 

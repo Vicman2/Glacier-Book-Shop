@@ -12,6 +12,7 @@ import { getInLocalStorage } from './Util/localStorage';
 import Preview from './container/Preview/Preview';
 import CheckoutSingleBook from './container/Checkout/CheckoutSingleBook/CheckoutSingleBook';
 import CheckAuth from './components/CheckAuth/CheckAuth';
+import Notification from './components/UI/Notification/Notification';
 
 class App extends Component{
   constructor(props){
@@ -65,6 +66,11 @@ class App extends Component{
             <Route path="/checkout" component={CheckoutSingleBook} />
             <Route path="/" exact component={Home} />
           </Switch>
+          <Notification
+          show={this.props.showNotification}
+          status={this.props.notification.status}
+          content={this.props.notification.content}
+          />
         <Footer mode="dark"/>
       </div>
     )
@@ -75,7 +81,9 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn,
     cart: state.cart,
-    showAuth: state.showAuth
+    showAuth: state.showAuth,
+    showNotification: state.showNotification,
+    notification: state.notification
   }
 }
 

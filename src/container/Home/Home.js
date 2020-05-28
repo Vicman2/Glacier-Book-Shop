@@ -53,7 +53,6 @@ class Home extends Component{
 
         return(
             <Aux>
-                {/* <CheckAuth show/> */}
                 <BookSides booksToSlide={booksToSlide}/>
                 <BookCards books={booksForCard} />
                 <div className="Category">

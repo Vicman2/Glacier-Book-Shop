@@ -1,0 +1,60 @@
+.Notification{
+    position: fixed;
+    bottom: 40px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    width: 100%;
+}
+.Notification_Content{
+    max-width: 90%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 7px;
+    align-items: center;
+    padding: 1px 3px;
+}
+.Notification_Content button{
+    background-color: inherit;
+    color: inherit;
+    border: 2px solid rgba(204, 204, 204, 0.726);
+    outline: none;
+}
+.Notification_Content ion-icon{
+    font-size: 24px;
+}
+.Notification_Content p{
+    margin: 2px 3px;
+}
+.Notification_Success{
+    background-color: rgb(168, 228, 128);
+    color: rgb(3, 95, 3);
+}
+.Notification_Warning{
+    background-color: rgb(255, 243, 204);
+    color: rgb(133, 100, 4);
+}
+.Notification_Error{
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.Notification_Primary{
+    background-color: #cce5ff;
+    color: #004085;
+}
+.Show_Notification{
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 200ms, transform 500ms;
+}
+.Hide_Notification{
+    opacity: 0;
+    transform: translateY(200%);
+    transition: opacity 20s, transform 500ms;
+}
+
+@media(min-width:800px){
+    .Notification_Content{
+        max-width: 30%;
+    }
+}
