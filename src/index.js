@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import { getInLocalStorage } from './Util/localStorage';
 
 const httpLink = createHttpLink({
-  uri: 'https://evening-ocean-00271.herokuapp.com/',
+  uri: 'https://glacier-api.herokuapp.com/',
   credentials: 'include'
 })
 
