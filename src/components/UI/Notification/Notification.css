@@ -49,7 +49,7 @@
 }
 .Hide_Notification{
     opacity: 0;
-    transform: translateY(200%);
+    transform: translateY(220%);
     transition: opacity 20s, transform 500ms;
 }
 

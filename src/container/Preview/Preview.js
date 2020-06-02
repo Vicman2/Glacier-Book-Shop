@@ -5,6 +5,8 @@ import './Preview.css'
 import { graphql } from 'react-apollo'
 import bookImage from '../Home/Assets/Cooking.jpeg'
 import { connect } from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import {addToCart} from '../../Query_Mutation/mutation'
 import Button from '../../components/UI/Button/Button'
 import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 import * as actionTypes from '../../Store/actions'
@@ -17,6 +19,19 @@ class Preview extends Component{
     }
 
     addToCart = (id) =>{
+        if(this.props.isLoggedIn){
+            this.props.mutate({
+                variables: {
+                    bookId: id
+                }
+            }).then(data=> {
+                console.log(data)
+                this.props.showCartNotification({
+                    status: "success", 
+                    content: "Book have been added to cart successfully"
+                })
+            })
+        }
         const exist = this.props.cart.find(prodId => prodId === id)
         if(exist){
             this.props.showCartNotification({
@@ -32,11 +47,29 @@ class Preview extends Component{
         }
     }
     buyBook = (id) => {
+        console.log(id)
         this.props.addToCart(id);
         if(!this.props.isLoggedIn){
             this.props.showAuth()
         }else{
-            this.props.history.push('/checkout');
+            this.props.mutate({
+                variables: {
+                    bookId: id
+                }
+            }).then(data=> {
+                console.log(data)
+                this.props.showCartNotification({
+                    status: "success", 
+                    content: "Book have been added to cart successfully"
+                }).cart(err=> {
+                    const errors = err.graphQLErrors.map(err => err.message);
+                    this.props.showCartNotification({
+                        status:"primary",
+                        content: errors
+                    })
+                })
+            })
+            this.props.history.push('/cart');
         }
     }
     cancelCheckAuth = ()=> {
@@ -79,7 +112,7 @@ class Preview extends Component{
                             {/* <PaystackConsumer {...config} >
                                 {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
                             </PaystackConsumer> */}
-                            <Button name="Buy Now" clicked={() => this.buyBook(book.price)} />
+                            <Button name="Buy Now" clicked={() => this.buyBook(book._id)} />
                             <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
                         </div>
                         <p className="Preview_Description_Title">Description</p>
@@ -160,6 +193,10 @@ const actionsMappedToProps = dispatch => {
     }
 }
 
-export default connect(stateMapedToProps, actionsMappedToProps) (graphql(query, {
-    options : (props) => ({ variables : { id: props.match.params.id}})
-}) (Preview))
+export default compose(
+    connect(stateMapedToProps, actionsMappedToProps), 
+    graphql(addToCart),
+    graphql(query, {
+        options : (props) => ({ variables : { id: props.match.params.id}})
+    })
+)(Preview)

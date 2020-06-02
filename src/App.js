@@ -10,9 +10,10 @@ import Login from './container/Authentication/Login/Login';
 import * as actionCreators from './Store/actions'
 import { getInLocalStorage } from './Util/localStorage';
 import Preview from './container/Preview/Preview';
-import CheckoutSingleBook from './container/Checkout/CheckoutSingleBook/CheckoutSingleBook';
 import CheckAuth from './components/CheckAuth/CheckAuth';
 import Notification from './components/UI/Notification/Notification';
+import Checkout from './container/Checkout/Checkout';
+import HarmburgerMenu from './components/NavBar/HamburgerMenu/HamburgerMenu';
 
 class App extends Component{
   constructor(props){
@@ -20,7 +21,8 @@ class App extends Component{
     this.state = {
       clickedSignIn: false, 
       clickedLogin:false,
-      checkAuth: false
+      checkAuth: false,
+      harmburgerMenu: false
     }
   }
   componentDidMount(){
@@ -38,14 +40,24 @@ class App extends Component{
       return {clickedLogin: !state.clickedLogin}
     })
   }
+  showHarmburger = () => {
+    this.setState(state=> {
+      return {harmburgerMenu: !state.harmburgerMenu};
+    })
+  }
   render(){
-    console.log(this.state.clickedLogin)
     return(
       <div className="App">
         <NavBar 
         mode="dark"
         clickedSignIn={this.signInHandler}
         clickedLogin={this.logInHandler}
+        clickedHarmburger={this.showHarmburger}
+        showHamBurger={this.state.harmburgerMenu}
+        />
+        <HarmburgerMenu
+          show={this.state.harmburgerMenu}
+          clicked={this.showHarmburger}
         />
         <SignIn 
         show={this.state.clickedSignIn}
@@ -63,7 +75,7 @@ class App extends Component{
           />
           <Switch>
             <Route path="/product/:id" component={Preview} />
-            <Route path="/checkout" component={CheckoutSingleBook} />
+            <Route path="/cart" component={Checkout} />
             <Route path="/" exact component={Home} />
           </Switch>
           <Notification

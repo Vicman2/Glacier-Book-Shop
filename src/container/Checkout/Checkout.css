@@ -1,0 +1,37 @@
+.Checkout{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
+    color: #f5f5f5;
+}
+.Checkout_Error_Text{
+    margin: 0;
+    text-align: center;
+}
+.Checkout_Wrapper{
+    padding: 0 10px;
+    padding-top: 10px;
+}
+.Checkout_Headers{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+.Checkout_Price_Quantity{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-right: 20px;
+}
+.Checkout_Price_Quantity p{
+    margin: 2px 5px;
+}
+
+
+@media(min-width: 800px){
+    .Checkout_Wrapper{
+        padding: 0 50px;
+        padding-top: 20px;
+    }
+}

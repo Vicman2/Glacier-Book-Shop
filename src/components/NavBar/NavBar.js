@@ -6,6 +6,7 @@ import Aux from '../../HOC/Aux'
 import NavItems from './NavItems/NavItems'
 import Button from '../UI/Button/Button'
 import { connect } from 'react-redux'
+import Harmburger from '../UI/Harmburger/Harmburger'
 
 const NavBar = (props) => {
     const className = props.mode === "dark" ? "NavBar_Dark" : "NavBar_Bright"; 
@@ -23,6 +24,12 @@ const NavBar = (props) => {
     return(
         <Aux>
             <div className={className}>
+                <div className="Nav_HarmBurger">
+                    <Harmburger 
+                    hide={!props.showHamBurger}
+                    clicked={props.clickedHarmburger}
+                     />
+                </div>
                 <div className="Nav_Logo">
                     <img src={logo} alt="Logo" />
                 </div>

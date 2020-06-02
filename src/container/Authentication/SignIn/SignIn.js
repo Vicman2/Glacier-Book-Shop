@@ -8,6 +8,8 @@ import Modal from '../../../components/UI/Modal/Modal'
 import gql from 'graphql-tag'
 import { setInLocalStorage } from '../../../Util/localStorage'
 import { connect } from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import {makeCart} from '../../../Query_Mutation/mutation'
 
 const FORM_INPUTS=  {
     name: {
@@ -133,7 +135,7 @@ class SignIn extends Component{
                 data[deKey]= this.state.formInputs[deKey].value
             }
             await this.setState({loading: true})
-            this.props.mutate({
+            this.props.signUp({
                 variables: {
                     name: data.name,
                     email: data.email,
@@ -147,6 +149,15 @@ class SignIn extends Component{
                 this.props.login(res.data.signUp.token)
                 this.setState({formInputs: FORM_INPUTS})
                 this.props.cancel()
+                if(this.props.cart.length>0){
+                    this.props.makeCart({
+                        variables: {
+                            books: this.props.cart
+                        }
+                    }).catch(err=> {
+                        console.log(err)
+                    })
+                }
             })
             .catch(err=> {
                 this.setState({loading: false})
@@ -157,6 +168,7 @@ class SignIn extends Component{
         }
     }
     render(){
+        console.log(this.props)
         let formElements = [];
         for(let elementName in this.state.formInputs){
             formElements.push({
@@ -190,7 +202,6 @@ class SignIn extends Component{
             button1Name="cancel"
             button2Name="Sign Up"
             show={this.props.show}
-            clicked={this.props.cancel}
             onClickButton1={this.props.cancel}
             onClickButton2={this.onSubmitHandler}
             loading2={this.state.loading}
@@ -224,9 +235,19 @@ mutation SignUp($name : String!, $email:String!, $phone: String!, $password: Str
 }
 `
 
+const stateMappedToProps = state =>{
+    return {
+        cart : state.cart
+    }
+}
+
 const actionsMappedToProps = (dispatch) => {
     return {
         login: (token) => dispatch(actionTypes.login(token))
     }
 }
-export default graphql(mutation) (connect(null, actionsMappedToProps) (SignIn))
+export default compose(
+    graphql(mutation, {name:"signUp"}),
+    graphql(makeCart, {name:'makeCart'}),
+    connect(stateMappedToProps, actionsMappedToProps)
+)  (SignIn)

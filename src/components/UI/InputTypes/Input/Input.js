@@ -35,6 +35,20 @@ const input = (props) => {
             </Aux>
         )
         break;
+        case('select'): 
+        inputElement = (
+            <select
+            className="Input_Element"
+            value={props.value}
+            >
+                {props.elementConfig.options.map(option => (
+                    <option key={option.value} value={option.value}>
+                        {option.displayValue}
+                    </option>
+                ))}
+            </select>
+        )
+        break;
         default: 
         inputElement = <input 
         className="Input__Element" 

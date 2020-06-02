@@ -5,7 +5,9 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import Modal from '../../../components/UI/Modal/Modal'
 import Input from '../../../components/UI/InputTypes/Input/Input'
 import {setInLocalStorage} from '../../../Util/localStorage'
-import {withApollo} from 'react-apollo'
+import {flowRight as compose} from 'lodash'
+import {withApollo, graphql} from 'react-apollo'
+import {makeCart} from '../../../Query_Mutation/mutation'
 import './Login.css'
 import { connect } from 'react-redux'
 
@@ -109,7 +111,16 @@ class Login extends Component{
             }).then(res => {
                 this.setState({loading: false})
                 const {token} = res.data.login
-                setInLocalStorage("token", token, 360000);
+                if(this.props.cart.length>0){
+                    this.props.mutate({
+                        variables: {
+                            books: this.props.cart
+                        }
+                    }).catch(err=> {
+                        console.log(err)
+                    })
+                }
+                setInLocalStorage("token", token, 3600000);
                 this.props.login(token)
                 this.setState({formInputs: FORM_INPUTS});
                 this.props.cancel()
@@ -185,6 +196,11 @@ class Login extends Component{
         )
     }
 }
+const stateMappedToProps = state => {
+    return{
+        cart : state.cart
+    }
+}
 
 const actionsMappedToProps = (dispatch) => {
     return {
@@ -192,4 +208,8 @@ const actionsMappedToProps = (dispatch) => {
     }
 }
 
-export default  connect(null, actionsMappedToProps)(withApollo (Login))
+export default  compose(
+    withApollo,
+    graphql(makeCart),
+    connect(stateMappedToProps, actionsMappedToProps)
+    ) (Login)

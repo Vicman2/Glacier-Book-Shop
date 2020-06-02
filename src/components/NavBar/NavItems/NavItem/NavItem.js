@@ -11,7 +11,7 @@ const NavItem = (props) => {
     }
     return(
         <Aux>
-            <li className="NavItem">
+            <li className="NavItem" onClick={props.clicked}>
     <NavLink activeClassName="active" exact={props.exact} to={props.url}> {props.name} {icon}</NavLink>
             </li>
         </Aux>
