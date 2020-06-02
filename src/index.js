@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import { getInLocalStorage } from './Util/localStorage';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql/',
+  uri: 'https://evening-ocean-00271.herokuapp.com/',
   credentials: 'include'
 })
 

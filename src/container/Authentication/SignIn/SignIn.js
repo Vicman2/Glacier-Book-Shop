@@ -168,7 +168,6 @@ class SignIn extends Component{
         }
     }
     render(){
-        console.log(this.props)
         let formElements = [];
         for(let elementName in this.state.formInputs){
             formElements.push({
