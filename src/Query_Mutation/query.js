@@ -1,6 +1,6 @@
 const  gql = require('graphql-tag')
 
-module.exports= {
+const querys = {
     getUserForCart: gql`
         {
             getUserForCart{
@@ -17,3 +17,5 @@ module.exports= {
         }
     `
 }
+
+export default querys

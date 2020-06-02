@@ -4,7 +4,7 @@ import * as actionTypes from '../../Store/actions'
 import {flowRight as compose} from 'lodash'
 import './Checkout.css'
 import CartItem from './CartItem/CartItem'
-import {getUserForCart} from '../../Query_Mutation/query'
+import querys from '../../Query_Mutation/query'
 import { graphql } from 'react-apollo'
 
 
@@ -84,5 +84,5 @@ const actionMappedToProps = dispatch => {
 
 export default compose(
     connect(stateMappedToProps, actionMappedToProps), 
-    graphql(getUserForCart)
+    graphql(querys.getUserForCart)
 )(Checkout)

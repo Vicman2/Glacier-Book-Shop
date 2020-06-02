@@ -9,7 +9,7 @@ import gql from 'graphql-tag'
 import { setInLocalStorage } from '../../../Util/localStorage'
 import { connect } from 'react-redux'
 import {flowRight as compose} from 'lodash'
-import {makeCart} from '../../../Query_Mutation/mutation'
+import mutations from '../../../Query_Mutation/mutation'
 
 const FORM_INPUTS=  {
     name: {
@@ -247,6 +247,6 @@ const actionsMappedToProps = (dispatch) => {
 }
 export default compose(
     graphql(mutation, {name:"signUp"}),
-    graphql(makeCart, {name:'makeCart'}),
+    graphql(mutations.makeCart, {name:'makeCart'}),
     connect(stateMappedToProps, actionsMappedToProps)
 )  (SignIn)

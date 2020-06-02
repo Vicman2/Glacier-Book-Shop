@@ -6,7 +6,7 @@ import { graphql } from 'react-apollo'
 import bookImage from '../Home/Assets/Cooking.jpeg'
 import { connect } from 'react-redux'
 import {flowRight as compose} from 'lodash'
-import {addToCart} from '../../Query_Mutation/mutation'
+import mutations from '../../Query_Mutation/mutation'
 import Button from '../../components/UI/Button/Button'
 import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 import * as actionTypes from '../../Store/actions'
@@ -195,7 +195,7 @@ const actionsMappedToProps = dispatch => {
 
 export default compose(
     connect(stateMapedToProps, actionsMappedToProps), 
-    graphql(addToCart),
+    graphql(mutations.addToCart),
     graphql(query, {
         options : (props) => ({ variables : { id: props.match.params.id}})
     })

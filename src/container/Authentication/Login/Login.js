@@ -7,7 +7,7 @@ import Input from '../../../components/UI/InputTypes/Input/Input'
 import {setInLocalStorage} from '../../../Util/localStorage'
 import {flowRight as compose} from 'lodash'
 import {withApollo, graphql} from 'react-apollo'
-import {makeCart} from '../../../Query_Mutation/mutation'
+import mutations from '../../../Query_Mutation/mutation'
 import './Login.css'
 import { connect } from 'react-redux'
 
@@ -210,6 +210,6 @@ const actionsMappedToProps = (dispatch) => {
 
 export default  compose(
     withApollo,
-    graphql(makeCart),
+    graphql(mutations.makeCart),
     connect(stateMappedToProps, actionsMappedToProps)
     ) (Login)

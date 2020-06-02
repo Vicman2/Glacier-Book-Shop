@@ -1,6 +1,6 @@
-const gql = require('graphql-tag')
+import gql from 'graphql-tag'
 
-module.exports= {
+const mutation= {
     makeCart: gql`
         mutation MakeCart($books:[ID]!){
             makeCart(books: $books){
@@ -21,3 +21,5 @@ module.exports= {
         }
     `
 }
+
+export default mutation
