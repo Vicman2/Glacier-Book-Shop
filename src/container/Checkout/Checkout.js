@@ -6,6 +6,7 @@ import './Checkout.css'
 import CartItem from './CartItem/CartItem'
 import querys from '../../Query_Mutation/query'
 import { graphql } from 'react-apollo'
+import mutation from '../../Query_Mutation/mutation'
 
 
 class Checkout extends Component{
@@ -28,8 +29,28 @@ class Checkout extends Component{
            }
        }, 100)
     }
+    deleteBookFromCart = (id) => {
+        this.props.mutate({
+            variables: {
+                bookId : id
+            }
+        }).then(data=>{
+            this.props.showCartNotification({
+                status:"success",
+                content: "Item deleted from cart successfully"
+            })
+        }).catch(err=> {
+            if(err.graphQLErrors){
+                let errors = err.graphQLErrors.map(err => err.message)
+                this.props.showCartNotification({
+                    status:"error",
+                    content: errors
+                })
+            }
+        })
+    }
     render(){
-        console.log(this.props.data)
+        console.log(this.props)
         let items
         if(!this.props.data.getUserForCart){
             items = null
@@ -40,6 +61,7 @@ class Checkout extends Component{
                 title={item.title}
                 author={item.author.name}
                 price={item.price}
+                deleteItem={()=>this.deleteBookFromCart(item._id)}
                 />
             ))
         }
@@ -78,11 +100,13 @@ const stateMappedToProps = state => {
 }
 const actionMappedToProps = dispatch => {
     return {
-        showAuth : ()=> dispatch(actionTypes.showAuth())
+        showAuth : ()=> dispatch(actionTypes.showAuth()), 
+        showCartNotification: (payload) => dispatch(actionTypes.showNotification(payload))
     }
 }
 
 export default compose(
     connect(stateMappedToProps, actionMappedToProps), 
-    graphql(querys.getUserForCart)
+    graphql(querys.getUserForCart),
+    graphql(mutation.deleteBookFromCart)
 )(Checkout)

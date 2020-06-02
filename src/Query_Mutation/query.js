@@ -4,6 +4,7 @@ const querys = {
     getUserForCart: gql`
         {
             getUserForCart{
+                _id
                 cart{
                     _id
                     title

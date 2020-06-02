@@ -25,7 +25,6 @@ class Preview extends Component{
                     bookId: id
                 }
             }).then(data=> {
-                console.log(data)
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
@@ -57,16 +56,16 @@ class Preview extends Component{
                     bookId: id
                 }
             }).then(data=> {
-                console.log(data)
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
-                }).cart(err=> {
-                    const errors = err.graphQLErrors.map(err => err.message);
-                    this.props.showCartNotification({
-                        status:"primary",
-                        content: errors
-                    })
+                })
+            })
+            .catch(err=> {
+                const errors = err.graphQLErrors.map(err => err.message);
+                this.props.showCartNotification({
+                    status:"primary",
+                    content: errors
                 })
             })
             this.props.history.push('/cart');
@@ -194,9 +193,9 @@ const actionsMappedToProps = dispatch => {
 }
 
 export default compose(
-    connect(stateMapedToProps, actionsMappedToProps), 
     graphql(mutations.addToCart),
     graphql(query, {
         options : (props) => ({ variables : { id: props.match.params.id}})
-    })
+    }),
+    connect(stateMapedToProps, actionsMappedToProps)
 )(Preview)

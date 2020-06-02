@@ -19,6 +19,16 @@ const mutation= {
                 }
             }
         }
+    `,
+    deleteBookFromCart: gql`
+        mutation DeleteBookFromCart($bookId: ID!){
+            deleteBookFromCart(bookId: $bookId){
+                _id
+                cart{
+                    _id
+                }
+            }
+        }
     `
 }
 

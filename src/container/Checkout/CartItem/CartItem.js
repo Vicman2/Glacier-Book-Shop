@@ -44,7 +44,7 @@ class CartItem extends Component{
                         elementConfig={this.state.selectQuantity.elementConfig}
                     />
                     <p>${this.props.price} </p>
-                    <div className="CartItem_Delete_Container">
+                    <div className="CartItem_Delete_Container" onClick={this.props.deleteItem}>
                         <ion-icon name="trash"></ion-icon>
                     </div>
                 </div>
