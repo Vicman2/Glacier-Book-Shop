@@ -29,6 +29,12 @@ class Preview extends Component{
                     status: "success", 
                     content: "Book have been added to cart successfully"
                 })
+            }).catch(err => {
+                const errors = err.graphQLErrors.map(error => error.message)
+                this.props.showCartNotification({
+                    status:"primary", 
+                    content: errors
+                })
             })
         }
         const exist = this.props.cart.find(prodId => prodId === id)
@@ -46,7 +52,6 @@ class Preview extends Component{
         }
     }
     buyBook = (id) => {
-        console.log(id)
         this.props.addToCart(id);
         if(!this.props.isLoggedIn){
             this.props.showAuth()
@@ -60,8 +65,7 @@ class Preview extends Component{
                     status: "success", 
                     content: "Book have been added to cart successfully"
                 })
-            })
-            .catch(err=> {
+            }).catch(err=> {
                 const errors = err.graphQLErrors.map(err => err.message);
                 this.props.showCartNotification({
                     status:"primary",
@@ -76,15 +80,6 @@ class Preview extends Component{
     }
     render(){
         const book = {...this.props.data.getBook}
-        // const config = {
-        //     reference : (new Date()).getTime(), 
-        //     email: process.env.REACT_APP_RECIPIENT_EMAIL,
-        //     amount: book.price * 100, 
-        //     publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
-        //     text: 'Buy Now',
-        //     onSuccess: () => this.props.history.push('/'),
-        //     onClose: () => null
-        // }
         let src = ""
         if(!this.props.data.loading){
             src = this.props.imageEndpoint + book.imageUrl
@@ -108,9 +103,6 @@ class Preview extends Component{
                         </p>
                         <p>${book.price} </p>
                         <div className="Preview_ButtonWrapper">
-                            {/* <PaystackConsumer {...config} >
-                                {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
-                            </PaystackConsumer> */}
                             <Button name="Buy Now" clicked={() => this.buyBook(book._id)} />
                             <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
                         </div>

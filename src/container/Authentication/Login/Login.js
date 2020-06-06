@@ -116,7 +116,10 @@ class Login extends Component{
                         variables: {
                             books: this.props.cart
                         }
-                    }).catch(err=> {
+                    }).then(res => {
+                        this.props.updateCart(res.data.logIn)
+                    })
+                    .catch(err=> {
                         console.log(err)
                     })
                 }
@@ -204,7 +207,8 @@ const stateMappedToProps = state => {
 
 const actionsMappedToProps = (dispatch) => {
     return {
-        login: (token) => dispatch(actionTypes.login(token))
+        login: (token) => dispatch(actionTypes.login(token)),
+        updateCart: (cart) => dispatch(actionTypes.getCartOnLogin(cart))
     }
 }
 

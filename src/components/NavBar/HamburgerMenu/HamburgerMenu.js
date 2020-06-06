@@ -15,8 +15,8 @@ const HarmburgerMenu = (props) => {
         <Aux>
             <Backdrop toggled={props.show} clicked={props.clicked}/>
             <div className={classes.join(" ")}>
-                <div className="HarmBurger_Close" onClick={props.clicked}>
-                    <ion-icon name="close"></ion-icon>
+                <div className="HarmBurger_Close" >
+                    <ion-icon onClick={props.clicked} name="close"></ion-icon>
                 </div>
                 <ul>
                     <NavItem clicked={props.clicked} url="/" name="Home" exact/>

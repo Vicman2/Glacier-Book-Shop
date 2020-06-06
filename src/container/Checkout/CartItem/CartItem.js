@@ -18,11 +18,27 @@ class CartItem extends Component{
         this.state = {
            selectQuantity: {
                elemType:"select",
-               value: "",
+               value: this.props.quantity,
                elementConfig: {
                     options
                }
            }
+        }
+    }
+    changed = (event) => {
+        this.props.changeQuantity(this.props.id,event.target.value)
+    }
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.quantity !== prevState.selectQuantity.value){
+            const selectQuantity = {
+                ...prevState.selectQuantity, 
+                value: nextProps.quantity
+            }
+            return {
+                selectQuantity
+            }
+        }else{
+            return null
         }
     }
     render(){
@@ -42,6 +58,7 @@ class CartItem extends Component{
                         elemType={this.state.selectQuantity.elemType}
                         value={this.state.selectQuantity.value}
                         elementConfig={this.state.selectQuantity.elementConfig}
+                        changed={(event)=>this.changed(event)}
                     />
                     <p>${this.props.price} </p>
                     <div className="CartItem_Delete_Container" onClick={this.props.deleteItem}>

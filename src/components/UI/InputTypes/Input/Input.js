@@ -40,6 +40,7 @@ const input = (props) => {
             <select
             className="Input_Element"
             value={props.value}
+            onChange={props.changed}
             >
                 {props.elementConfig.options.map(option => (
                     <option key={option.value} value={option.value}>

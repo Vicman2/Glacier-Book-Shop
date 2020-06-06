@@ -27,6 +27,12 @@
 .Checkout_Price_Quantity p{
     margin: 2px 5px;
 }
+.CheckOut_Totalprice{
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 20px;
+}
 
 
 @media(min-width: 800px){

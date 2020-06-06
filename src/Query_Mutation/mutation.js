@@ -29,6 +29,26 @@ const mutation= {
                 }
             }
         }
+    `,
+    changeBookQuantity: gql`
+        mutation ChangeBookQuantity($bookId: ID!, $quantity: Int!){
+            changeBookQuantity(bookId:$bookId, quantity: $quantity){
+                _id
+                cart{
+                    _id
+                    quantity
+                    bookId{
+                        _id
+                        title
+                        price
+                        imageUrl
+                        author{
+                            name
+                        }
+                    }
+                }
+            }
+        }
     `
 }
 

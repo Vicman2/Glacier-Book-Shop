@@ -7,11 +7,15 @@ const querys = {
                 _id
                 cart{
                     _id
-                    title
-                    price
-                    imageUrl
-                    author{
-                        name
+                    quantity
+                    bookId{
+                        _id
+                        title
+                        price
+                        imageUrl
+                        author{
+                            name
+                        }
                     }
                 }
             }

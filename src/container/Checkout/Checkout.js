@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {usePaystackPayment, PaystackButton, PaystackConsumer} from 'react-paystack'
 import { connect } from 'react-redux'
 import * as actionTypes from '../../Store/actions'
 import {flowRight as compose} from 'lodash'
@@ -13,24 +14,48 @@ class Checkout extends Component{
     constructor(props){
         super(props);
         this.state = {
-            isLoggedIn: this.props.isLoggedIn
+            isLoggedIn: this.props.isLoggedIn, 
+            cart: null, 
+            totalprice: null
         }
     }
     componentDidUpdate(prevProps, prevState){
-        if(prevProps.isLoggedIn !== this.props.isLoggedIn){
+        if(prevProps.isLoggedIn !== this.props.isLoggedIn ){
             this.setState({isLoggedIn: this.props.isLoggedIn})
         }
     }
-    
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.data.getUserForCart && prevState.cart !== nextProps.data.getUserForCart.cart){
+            return{
+                cart: nextProps.data.getUserForCart.cart
+            }
+        }else{
+            return null
+        }
+    }
     componentDidMount(){
        setTimeout(() => {
            if(!this.props.isLoggedIn){
-               this.props.showAuth()
+               this.props.showAuth();
            }
        }, 100)
     }
+    changeQuantity = (_id, quantity)=>{
+        this.props.changeBookQuantity({
+            variables:{
+                bookId: _id,
+                quantity: parseInt(quantity)
+            }
+        }).then(res=> {
+            this.setState({cart: res.data.changeBookQuantity.cart})
+        }).catch(err=> {
+            if(err.graphQLErrors){
+                console.log(err.graphQLErrors)
+            }
+        })
+    }
     deleteBookFromCart = (id) => {
-        this.props.mutate({
+        this.props.deleteBookFromCart({
             variables: {
                 bookId : id
             }
@@ -50,20 +75,41 @@ class Checkout extends Component{
         })
     }
     render(){
-        console.log(this.props)
+        let totalPrice = 0
         let items
-        if(!this.props.data.getUserForCart){
+        if(!this.state.cart){
             items = null
         }else{
-            items = this.props.data.getUserForCart.cart.map(item=> (
+            const prices = this.state.cart.map(book => book.bookId.price * book.quantity)
+            totalPrice = prices.reduce((accumulator, currentValue) => accumulator + currentValue)
+            items = this.state.cart.map(item=> (
                 <CartItem
-                imageUrl={item.imageUrl}
-                title={item.title}
-                author={item.author.name}
-                price={item.price}
-                deleteItem={()=>this.deleteBookFromCart(item._id)}
+                key={item.bookId._id}
+                id={item.bookId._id}
+                imageUrl={item.bookId.imageUrl}
+                title={item.bookId.title}
+                author={item.bookId.author? item.bookId.author.name: ""}
+                quantity={item.quantity}
+                price={item.bookId.price}
+                deleteItem={()=>this.deleteBookFromCart(item.bookId._id)}
+                changeQuantity={this.changeQuantity}
                 />
             ))
+        }
+        const config = {
+            reference : (new Date()).getTime(), 
+            email: "vicmanthebest@gmail.com",
+            amount: totalPrice * 100, 
+            publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
+            text: 'Buy Now',
+            onSuccess: () => {
+                this.props.history.push('/')
+                this.props.showCartNotification({
+                    status:"success",
+                    content: "Your order have been recieved, you will recieve it in 2 days time"
+                })
+            },
+            onClose: () => null
         }
         let toRender = ""
         if(!this.state.isLoggedIn){
@@ -83,6 +129,14 @@ class Checkout extends Component{
                     </div>
                     <hr />
                     {items}
+                    <div className="CheckOut_Totalprice">
+                        <p>Total:  ${totalPrice}</p>
+                    </div>
+                    <div className="Proceed_ToCheckout">
+                            <PaystackConsumer {...config} >
+                                {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
+                            </PaystackConsumer>
+                    </div>
                 </div>
         }
         return(
@@ -106,7 +160,8 @@ const actionMappedToProps = dispatch => {
 }
 
 export default compose(
-    connect(stateMappedToProps, actionMappedToProps), 
+    connect(stateMappedToProps, actionMappedToProps),
     graphql(querys.getUserForCart),
-    graphql(mutation.deleteBookFromCart)
+    graphql(mutation.deleteBookFromCart,{name: "deleteBookFromCart"}),
+    graphql(mutation.changeBookQuantity, {name: "changeBookQuantity"})
 )(Checkout)

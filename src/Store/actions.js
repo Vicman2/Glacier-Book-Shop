@@ -4,6 +4,8 @@ export const SHOW_AUTH = "SHOW_AUTH"
 export const CANCEL_AUTH = "CANCEL_AUTH"
 export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION"
 export const CANCEL_NOTIFICATION = "CANCEL_NOTIFICATION"
+export const GET_CART_ON_LOGIN = "GET_CART_CART_ON_LOGIN"
+export const UPDATE_CART= "UPDATECART"
 
 
 export const login = (token) => {
@@ -23,4 +25,10 @@ export const showNotification = (payload) => {
 }
 export const cancelNotificaton = () => {
     return {type: CANCEL_NOTIFICATION}
+}
+export const getCartOnLogin = (cart) => {
+    return {type: GET_CART_ON_LOGIN, cart}
+}
+export const updateCart = (payload) => {
+    return {type: UPDATE_CART, payload}
 }
