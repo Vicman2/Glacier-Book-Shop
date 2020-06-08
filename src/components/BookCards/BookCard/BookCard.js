@@ -22,7 +22,7 @@ const BookCard = (props) => {
                 <p> {props.title.toUpperCase()} </p>
                 <p>${props.price} </p>
                 <div className="BookCard_Button">
-                    <button>Buy now</button>
+                    <button >Buy now</button>
                 </div>
             </div>
         </div>
