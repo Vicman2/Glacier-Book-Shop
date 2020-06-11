@@ -49,6 +49,13 @@ const mutation= {
                 }
             }
         }
+    `, 
+    emptyCart: gql`
+        mutation{
+            emptyUserCart{
+            _id
+            }
+        }
     `
 }
 

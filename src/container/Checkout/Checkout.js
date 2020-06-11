@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {usePaystackPayment, PaystackButton, PaystackConsumer} from 'react-paystack'
+import {PaystackConsumer} from 'react-paystack'
 import { connect } from 'react-redux'
 import * as actionTypes from '../../Store/actions'
 import {flowRight as compose} from 'lodash'
@@ -77,10 +77,12 @@ class Checkout extends Component{
     render(){
         let totalPrice = 0
         let items
-        if(!this.state.cart){
+        if(!this.props.data.getUserForCart){
             items = null
+        }else if(this.state.cart.length === 0){
+            items = <div> You have nothing in the cart</div>
         }else{
-            const prices = this.state.cart.map(book => book.bookId.price * book.quantity)
+            const prices = this.props.data.getUserForCart.cart.map(book => book.bookId.price * book.quantity)
             totalPrice = prices.reduce((accumulator, currentValue) => accumulator + currentValue)
             items = this.state.cart.map(item=> (
                 <CartItem
@@ -107,6 +109,16 @@ class Checkout extends Component{
                 this.props.showCartNotification({
                     status:"success",
                     content: "Your order have been recieved, you will recieve it in 2 days time"
+                })
+                this.props.emptyCart()
+                .catch(err => {
+                    if(err.graphQLErrors){
+                        let errors = err.graphQLErrors.map(err => err.message)
+                        this.props.showCartNotification({
+                            status:"error",
+                            content: errors
+                        })
+                    }
                 })
             },
             onClose: () => null
@@ -163,5 +175,6 @@ export default compose(
     connect(stateMappedToProps, actionMappedToProps),
     graphql(querys.getUserForCart),
     graphql(mutation.deleteBookFromCart,{name: "deleteBookFromCart"}),
-    graphql(mutation.changeBookQuantity, {name: "changeBookQuantity"})
+    graphql(mutation.changeBookQuantity, {name: "changeBookQuantity"}),
+    graphql(mutation.emptyCart, {name: "emptyCart"})
 )(Checkout)

@@ -5,6 +5,7 @@
     justify-content: center;
     background-color: transparent;
     width: 100%;
+    z-index: 500;
 }
 .Notification_Content{
     max-width: 90%;
