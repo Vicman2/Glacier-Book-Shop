@@ -23,10 +23,13 @@ const Footer = (props)=> {
                     <li>Terms and condition </li>
                     <li>Terms of user </li>
                     <li>Copy write </li>
+                </ul>
+                <ul className="Footer_Norm">
+                    <li>Copy write </li>
                     <li>Glacier</li>
+                    <li> Policy</li>
                 </ul>
                 <ul className="Footer_Abnorm">
-                    <li> Policy</li>
                     <li>Designed by Offordile Victor(Vicman)</li>
                 </ul>
             </section>

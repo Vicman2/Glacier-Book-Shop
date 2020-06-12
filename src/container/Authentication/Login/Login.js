@@ -45,7 +45,7 @@ const FORM_INPUTS=  {
         elemType: "input", 
         config: {
             type: 'password', 
-            placeholder: "password"
+            placeholder: "Password"
         },
         value:"",
         validation: function(){

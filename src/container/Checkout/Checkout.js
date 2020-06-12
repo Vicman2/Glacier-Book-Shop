@@ -47,10 +47,15 @@ class Checkout extends Component{
                 quantity: parseInt(quantity)
             }
         }).then(res=> {
+            this.props.data.refetch()
             this.setState({cart: res.data.changeBookQuantity.cart})
         }).catch(err=> {
             if(err.graphQLErrors){
-                console.log(err.graphQLErrors)
+                let errors = err.graphQLErrors.map(err => err.message)
+                this.props.showCartNotification({
+                    status:"error",
+                    content: errors
+                })
             }
         })
     }
@@ -60,6 +65,7 @@ class Checkout extends Component{
                 bookId : id
             }
         }).then(data=>{
+            this.props.data.refetch()
             this.props.showCartNotification({
                 status:"success",
                 content: "Item deleted from cart successfully"
@@ -146,7 +152,7 @@ class Checkout extends Component{
                     </div>
                     <div className="Proceed_ToCheckout">
                             <PaystackConsumer {...config} >
-                                {({initializePayment}) => <button onClick={() => initializePayment()}>Buy Now</button>}
+                                {({initializePayment}) => <button onClick={() => initializePayment()}>Pay ${totalPrice} </button>}
                             </PaystackConsumer>
                     </div>
                 </div>

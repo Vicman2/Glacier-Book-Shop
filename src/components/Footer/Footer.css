@@ -8,34 +8,32 @@
     position: absolute;
     width: 100vw;
     list-style: none;
+    padding: 2px 10px;
 }
 .Footer_Dark li, .Footer_Bright li{
     margin: auto 4px;
 }
 
 .Footer_Dark ul, .Footer_Bright ul{
-    margin: 4px auto;
     list-style: none;
 }
 .Footer_Logo{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50px;
-    height: 20px;
+    width: 100%;
 }
 .Footer_Logo img{
-    width: 100%;
+    width: 30%;
     height: 100%;
 }
 .Footer_Norm{
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-direction: column;
 }
 .Footer_Norm li{
-    margin: 7px auto;
+    margin: auto 10px;
 }
 .Footer_Abnorm{
     display: flex;
@@ -52,6 +50,9 @@
 }
 
 @media(min-width: 800px){
+    .Footer_Logo img{
+        width: 100px;
+    }
     .Footer_Dark, .Footer_Bright{
         align-items: center;
         flex-direction: column;

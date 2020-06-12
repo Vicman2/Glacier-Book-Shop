@@ -15,7 +15,7 @@ import * as serviceWorker from './serviceWorker';
 import { getInLocalStorage } from './Util/localStorage';
 
 const httpLink = createHttpLink({
-  uri: 'https://glacier-api.herokuapp.com/graphql',
+  uri: process.env.REACT_APP_API_URI,
   credentials: 'include'
 })
 

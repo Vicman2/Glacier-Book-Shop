@@ -1,7 +1,9 @@
 import React from 'react'
 import './LatestBook.css'
 import { capitalizeFirstWord } from '../../../Util/stringHelperFunctions'
+import {flowRight as compose} from 'lodash'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const LatestBook = (props) => {
     const src = props.imageEndPoint + props.imageUrl
@@ -12,11 +14,11 @@ const LatestBook = (props) => {
                 <p className="LatestBook_Author"> {capitalizeFirstWord(props.author)} </p>
                 <p>${props.price}</p>
                 <div className="BookCard_Button Added_Button_Class">
-                    <button>Buy now</button>
+                    <button onClick={() => props.history.push(`/product/${props.id}`)}>Buy now</button>
                 </div>
             </div>
             <div className="LatestBook_Image_Container">
-                <img src={src} />
+                <img src={src}  alt={props.title}/>
             </div>
         </div>
     )
@@ -28,4 +30,7 @@ const stateMappedToProps = state => {
     }
 }
 
-export default connect(stateMappedToProps) (LatestBook)
+export default compose(
+    withRouter,
+    connect(stateMappedToProps), 
+)  (LatestBook)

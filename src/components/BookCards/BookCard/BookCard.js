@@ -1,6 +1,8 @@
 import React from 'react'
 import  './BookCard.css'
 import { connect } from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -22,7 +24,7 @@ const BookCard = (props) => {
                 <p> {props.title.toUpperCase()} </p>
                 <p>${props.price} </p>
                 <div className="BookCard_Button">
-                    <button >Buy now</button>
+                    <button onClick={()=> props.history.push(`/product/${props.id}`)}>Buy now</button>
                 </div>
             </div>
         </div>
@@ -36,4 +38,7 @@ const stateMappedToProps = state => {
 }
 
 
-export default connect(stateMappedToProps)(BookCard)
+export default compose(
+    withRouter,
+    connect(stateMappedToProps)
+) (BookCard)

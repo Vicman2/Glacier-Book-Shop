@@ -3,8 +3,13 @@ import './HamburgerMenu.css'
 import Backdrop from '../../UI/Backdrop/Backdrop'
 import Aux from '../../../HOC/Aux'
 import NavItem from '../NavItems/NavItem/NavItem'
+import { connect } from 'react-redux'
 
 const HarmburgerMenu = (props) => {
+    let orders = null 
+    if(props.isLoggedIn){
+        orders = <NavItem clicked={props.clicked} url="/orders" exact  name="Orders" /> 
+    }
     const classes = ["HarmburgerMenu"]
     if(props.show){
         classes.push("Show_HarmburgerMenu")
@@ -22,10 +27,17 @@ const HarmburgerMenu = (props) => {
                     <NavItem clicked={props.clicked} url="/" name="Home" exact/>
                     <NavItem clicked={props.clicked} url="/about" exact name="About" />
                     <NavItem clicked={props.clicked} url="/cart" exact  name="Cart" iconName="cart"/> 
+                    {orders}
                 </ul>
             </div>
         </Aux>
     )
 }
 
-export default HarmburgerMenu
+const stateMappedToProps = (state)=> {
+    return {
+        isLoggedIn : state.isLoggedIn
+    }
+}
+
+export default connect(stateMappedToProps) (HarmburgerMenu)

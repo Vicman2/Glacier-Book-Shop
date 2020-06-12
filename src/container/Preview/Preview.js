@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {usePaystackPayment, PaystackButton, PaystackConsumer} from 'react-paystack'
 import gql from 'graphql-tag'
 import './Preview.css'
 import { graphql } from 'react-apollo'
@@ -15,7 +14,10 @@ import LatestBooks from '../../components/LatestBooks/LatestBooks'
 
 class Preview extends Component{
     constructor(props){
-        super(props)   
+        super(props)
+        this.state = {
+
+        }
     }
 
     addToCart = (id) =>{
@@ -25,6 +27,7 @@ class Preview extends Component{
                     bookId: id
                 }
             }).then(data=> {
+                this.props.data.refetch()
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
@@ -61,16 +64,19 @@ class Preview extends Component{
                     bookId: id
                 }
             }).then(data=> {
+                this.props.data.refetch();
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
                 })
             }).catch(err=> {
-                const errors = err.graphQLErrors.map(err => err.message);
-                this.props.showCartNotification({
-                    status:"primary",
-                    content: errors
-                })
+                if(err.graphQLErrors){
+                    const errors = err.graphQLErrors.map(err => err.message);
+                    this.props.showCartNotification({
+                        status:"primary",
+                        content: errors
+                    })
+                }
             })
             this.props.history.push('/cart');
         }
@@ -129,7 +135,7 @@ class Preview extends Component{
                             <p className="Preview_About_The_Author">About the Author</p>
                             <div className="Preview_Author_Details">
                                 <div className="Preview_Author_Image_Container">
-                                    <img src={bookImage} />
+                                    <img src={bookImage}  alt=""/>
                                 </div>
                                 <div className="Preview_Author">
                                     <p>{book.author? book.author.website : ""} </p>

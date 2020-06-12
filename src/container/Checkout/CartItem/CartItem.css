@@ -8,7 +8,7 @@ select option{
 
 .CartItem{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 15px auto;
 }
 .CartItem_Title{
@@ -52,6 +52,9 @@ select option{
 }
 
 @media(min-width: 800px){
+    .CartItem{
+        max-width: 1300px;
+    }
     .CartItem_First_Part{
         display: flex;
         align-items: flex-start;

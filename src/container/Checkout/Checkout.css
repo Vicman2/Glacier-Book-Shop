@@ -14,7 +14,7 @@
 }
 .Checkout_Headers{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     font-weight: bold;
 }
@@ -33,9 +33,32 @@
     font-weight: 500;
     font-size: 20px;
 }
-
+.Proceed_ToCheckout{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+.Proceed_ToCheckout button{
+    outline: none;
+    background-color: transparent;
+    color: #228FC0;
+    border: 1px solid #228FC0;
+    padding: 10px 15px;
+    font-weight: 400;
+    font-size: 24px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    border-radius: 5px;
+}
+.Proceed_ToCheckout button:hover{
+    background-color: #228FC0;
+    color: #f5f5f5;
+}
 
 @media(min-width: 800px){
+    .Checkout_Price_Quantity{
+        margin-right: 0;
+    }
     .Checkout_Wrapper{
         padding: 0 50px;
         padding-top: 20px;

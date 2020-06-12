@@ -7,6 +7,8 @@ import NavItems from './NavItems/NavItems'
 import Button from '../UI/Button/Button'
 import { connect } from 'react-redux'
 import Harmburger from '../UI/Harmburger/Harmburger'
+import { withRouter } from 'react-router-dom'
+import {flowRight as compose} from 'lodash'
 
 const NavBar = (props) => {
     const className = props.mode === "dark" ? "NavBar_Dark" : "NavBar_Bright"; 
@@ -30,7 +32,9 @@ const NavBar = (props) => {
                     clicked={props.clickedHarmburger}
                      />
                 </div>
-                <div className="Nav_Logo">
+                <div  
+                onClick= {()=> props.history.push('/')}
+                 className="Nav_Logo">
                     <img src={logo} alt="Logo" />
                 </div>
                 <div className="Nav_Search_Input">
@@ -55,4 +59,7 @@ const stateMapedToProps = (state) => {
     }
 }
 
-export default connect(stateMapedToProps) (NavBar)
+export default  compose(
+    withRouter,
+    connect(stateMapedToProps)
+)  (NavBar)

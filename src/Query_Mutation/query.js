@@ -14,6 +14,7 @@ const querys = {
                         price
                         imageUrl
                         author{
+                            _id
                             name
                         }
                     }

@@ -7,7 +7,6 @@ import { graphql } from 'react-apollo'
 import BookCards from '../../components/BookCards/BookCards'
 import BookInHome from '../../components/BookInHome/BookInHome'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
-import CheckAuth from '../../components/CheckAuth/CheckAuth'
 
 class Home extends Component{
     constructor(props){
@@ -25,6 +24,7 @@ class Home extends Component{
         if(this.props.data.getBooks){
             this.setState({books : this.props.data.getBooks})
         }
+
     }
     goToPreview = (id) => {
         this.props.history.push(`/product/${id}`)

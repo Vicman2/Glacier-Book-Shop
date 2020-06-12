@@ -1,7 +1,7 @@
 .App {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 23rem;
+  padding-bottom: 15.9rem;
   overflow: hidden;
   margin-top: 47px;
 }
@@ -9,6 +9,6 @@
 
 @media(min-width:800px){
   .App{
-    padding-bottom: 8rem;
+    padding-bottom: 14.7rem;
   }
 }

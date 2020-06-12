@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import './LatestBooks.css'
 import { graphql } from 'react-apollo'
 import LatestBook from './LatestBook/LatestBook'
+import {flowRight as compose} from 'lodash'
+import { withRouter } from 'react-router-dom'
 
 const LatestBooks = (props) => {
 
@@ -12,6 +14,7 @@ const LatestBooks = (props) => {
         toDisplay = toUse.map(book => {
             return(
                 <LatestBook
+                id={book._id}
                 key={book._id}
                 title={book.title}
                 price={book.price}
@@ -48,4 +51,7 @@ const query = gql`
 }
 `
 
-export default graphql(query) (LatestBooks)
+export default compose(
+    withRouter,
+    graphql(query) 
+) (LatestBooks)

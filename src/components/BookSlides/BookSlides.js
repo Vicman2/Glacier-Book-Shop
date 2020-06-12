@@ -4,6 +4,7 @@ import 'react-multi-carousel/lib/styles.css'
 import './BookSlides.css'
 import Aux from '../../HOC/Aux'
 import BookSlide from './BookSlide/Bookslide'
+import { withRouter } from 'react-router-dom'
 
 
 const BookSides = (props) => {
@@ -28,6 +29,7 @@ const BookSides = (props) => {
       const books = props.booksToSlide.map(book => (
         <BookSlide
         key={book._id}
+        id={book._id}
         quote="Legends can only convey their knowledge through a book "
         name={book.title}
         imageUrl={book.imageUrl}
@@ -48,4 +50,4 @@ const BookSides = (props) => {
 }
 
 
-export default BookSides
+export default withRouter (BookSides)

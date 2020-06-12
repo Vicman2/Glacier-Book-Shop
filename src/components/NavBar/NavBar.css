@@ -22,6 +22,9 @@
     display: flex;
     
 }
+.Nav_Logo:hover{
+    cursor: pointer;
+}
 
 .profile-Icon ion-icon{
     color: #ffffff;

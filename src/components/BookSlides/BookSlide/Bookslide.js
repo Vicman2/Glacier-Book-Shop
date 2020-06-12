@@ -2,6 +2,8 @@ import React from 'react'
 import './BookSlide.css'
 import Aux from '../../../HOC/Aux'
 import { connect } from 'react-redux'
+import {flowRight as compose} from 'lodash'
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -14,7 +16,7 @@ const BookSlide = (props) => {
                     <p className="BookSlide_Title"> {props.name.toUpperCase()} </p>
                     <p className="BookSlide_Quote"> {props.quote} </p>
                     <div className="BookSlide_CheckNow_Button">
-                        <button>Check now</button>
+                        <button onClick={() => props.history.push(`/product/${props.id}`)}>Check now</button>
                     </div>
                 </div>
                 <div className="BookSlide_Image">
@@ -32,4 +34,7 @@ const stateMapedToProps = (state)=> {
 }
 
 
-export default connect (stateMapedToProps) (BookSlide)
+export default compose(
+    withRouter,
+    connect (stateMapedToProps) 
+) (BookSlide)

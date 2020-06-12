@@ -28,6 +28,7 @@
     justify-content: center;
 }
 .BookSlide_CheckNow_Button button{
+    outline: none;
     background-color: #ffffff;
     border-radius: 50px;
     color: #050000;

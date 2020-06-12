@@ -1,10 +1,10 @@
 Input{
-    width: 98%;
+    width: 93%;
     border-radius: 4px;
     height: 2rem;
 }
 .Input__Element{
-    padding: 3px 5px;
+    padding: 5px 10px;
     margin: 12px auto;
     outline: none;
     background-color: black;
@@ -13,6 +13,7 @@ Input{
     color: #ccc;
     font-size: 15px;
     font-family: 'Roboto';
+    font-size: 16px;
 }
 .HideErrorMessage{
     display: none;
