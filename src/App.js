@@ -14,6 +14,7 @@ import CheckAuth from './components/CheckAuth/CheckAuth';
 import Notification from './components/UI/Notification/Notification';
 import Checkout from './container/Checkout/Checkout';
 import HarmburgerMenu from './components/NavBar/HamburgerMenu/HamburgerMenu';
+import Orders from './container/Orders/Orders';
 
 class App extends Component{
   constructor(props){
@@ -76,6 +77,7 @@ class App extends Component{
           <Switch>
             <Route path="/product/:id" component={Preview} />
             <Route path="/cart" component={Checkout} />
+            <Route path="/orders" component={Orders} />
             <Route path="/" exact component={Home} />
           </Switch>
           <Notification

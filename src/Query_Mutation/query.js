@@ -21,6 +21,20 @@ const querys = {
                 }
             }
         }
+    `, 
+    getOrders: gql`
+        {
+            getOrders{
+                _id
+                user
+                totalPrice
+                orders{
+                    _id
+                    quantity
+                    book
+                }
+            }
+        }
     `
 }
 

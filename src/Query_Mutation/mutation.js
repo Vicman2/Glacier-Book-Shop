@@ -56,6 +56,13 @@ const mutation= {
             _id
             }
         }
+    `, 
+    makeOrder: gql`
+        mutation{
+            makeOrder{
+            _id
+            }
+        }
     `
 }
 

@@ -47,7 +47,6 @@ class Checkout extends Component{
                 quantity: parseInt(quantity)
             }
         }).then(res=> {
-            this.props.data.refetch()
             this.setState({cart: res.data.changeBookQuantity.cart})
         }).catch(err=> {
             if(err.graphQLErrors){
@@ -65,7 +64,6 @@ class Checkout extends Component{
                 bookId : id
             }
         }).then(data=>{
-            this.props.data.refetch()
             this.props.showCartNotification({
                 status:"success",
                 content: "Item deleted from cart successfully"
@@ -116,6 +114,7 @@ class Checkout extends Component{
                     status:"success",
                     content: "Your order have been recieved, you will recieve it in 2 days time"
                 })
+                this.props.makeOrder()
                 this.props.emptyCart()
                 .catch(err => {
                     if(err.graphQLErrors){
@@ -182,5 +181,6 @@ export default compose(
     graphql(querys.getUserForCart),
     graphql(mutation.deleteBookFromCart,{name: "deleteBookFromCart"}),
     graphql(mutation.changeBookQuantity, {name: "changeBookQuantity"}),
+    graphql(mutation.makeOrder, {name: "makeOrder"}),
     graphql(mutation.emptyCart, {name: "emptyCart"})
 )(Checkout)
