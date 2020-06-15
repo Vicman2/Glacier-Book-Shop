@@ -15,6 +15,7 @@ import Notification from './components/UI/Notification/Notification';
 import Checkout from './container/Checkout/Checkout';
 import HarmburgerMenu from './components/NavBar/HamburgerMenu/HamburgerMenu';
 import Orders from './container/Orders/Orders';
+import About from './container/About/About';
 
 class App extends Component{
   constructor(props){
@@ -78,6 +79,7 @@ class App extends Component{
             <Route path="/product/:id" component={Preview} />
             <Route path="/cart" component={Checkout} />
             <Route path="/orders" component={Orders} />
+            <Route path="/about" component={About} />
             <Route path="/" exact component={Home} />
           </Switch>
           <Notification

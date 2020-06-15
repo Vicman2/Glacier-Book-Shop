@@ -31,7 +31,9 @@ const querys = {
                 orders{
                     _id
                     quantity
-                    book
+                    book{
+                        _id
+                    }
                 }
             }
         }
