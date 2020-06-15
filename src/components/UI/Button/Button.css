@@ -1,4 +1,4 @@
-.Button_Dark, .Button_Bright{
+.Button_Dark, .Button_Bright, .Button_White{
     cursor: pointer;
     border: 1px solid #228FC0;
     outline: none;
@@ -12,6 +12,7 @@
     font-family: 'Roboto';
 }
 
+
 .Button_Dark{
     background-color: #000000;
 }
@@ -24,4 +25,13 @@
 }
 .Button_Bright:hover{
     background-color: #000000;
+}
+
+.Button_White{
+    background-color: #ffffff;
+    color: #228FC0;
+}
+.Button_White:hover{
+    background-color: #228FC0;
+    color: #ffffff;
 }
