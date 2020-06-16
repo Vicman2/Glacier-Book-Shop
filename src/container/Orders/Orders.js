@@ -6,6 +6,7 @@ import query from '../../Query_Mutation/query'
 import noOrderSVG from './Assets/undraw_order_delivered_p6ba.svg'
 import Aux from '../../HOC/Aux'
 import Button from '../../components/UI/Button/Button'
+import Order from './Order/Order'
 
 
 class Orders extends Component{
@@ -24,8 +25,17 @@ class Orders extends Component{
                <div className="Order_MakeOrder_btn">
                     <Button mode="dark" name="Buy a book" clicked={()=> this.props.history.push('/')} />
                </div>
-            </Aux>
-             
+            </Aux>  
+        }else if(this.props.data.getOrders && this.props.data.getOrders.length > 0){
+            toRender = this.props.data.getOrders.map(order => (
+                <Order 
+                key={order._id}
+                id={order._id}
+                amount={order.totalPrice}
+                orderDate={order.createdAt}
+                />
+
+            ))
         }
         return(
             <div className="Orders">
