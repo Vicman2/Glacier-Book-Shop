@@ -1,3 +1,8 @@
+.Orders_Header{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 30px;
+}
 .Orders_NoOrder{
     display: flex;
     padding: 20px;

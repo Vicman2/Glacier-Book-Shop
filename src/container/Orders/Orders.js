@@ -39,6 +39,7 @@ class Orders extends Component{
         }
         return(
             <div className="Orders">
+                <p className="Orders_Header">Orders</p>
                 {toRender}
             </div>
         )

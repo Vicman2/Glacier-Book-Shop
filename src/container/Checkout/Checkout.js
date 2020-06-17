@@ -109,11 +109,11 @@ class Checkout extends Component{
             publicKey: process.env.REACT_APP_PAYSTACK_PUBLIC_KEY,
             text: 'Buy Now',
             onSuccess: () => {
-                this.props.history.push('/')
                 this.props.showCartNotification({
                     status:"success",
                     content: "Your order have been recieved, you will recieve it in 2 days time"
                 })
+                this.props.history.push('/orders')
                 this.props.makeOrder()
                 this.props.emptyCart()
                 .catch(err => {
