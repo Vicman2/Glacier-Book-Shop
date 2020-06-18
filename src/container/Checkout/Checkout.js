@@ -5,9 +5,12 @@ import * as actionTypes from '../../Store/actions'
 import {flowRight as compose} from 'lodash'
 import './Checkout.css'
 import CartItem from './CartItem/CartItem'
+import emptyCart from './Assets/undraw_empty_cart_co35.svg'
+import Authenticate from './Assets/undraw_authentication_fsn5.svg'
 import querys from '../../Query_Mutation/query'
 import { graphql } from 'react-apollo'
 import mutation from '../../Query_Mutation/mutation'
+import Aux from '../../HOC/Aux'
 
 
 class Checkout extends Component{
@@ -80,11 +83,17 @@ class Checkout extends Component{
     }
     render(){
         let totalPrice = 0
-        let items
+        let items = null
         if(!this.props.data.getUserForCart){
             items = null
         }else if(this.state.cart.length === 0){
-            items = <div> You have nothing in the cart</div>
+            items = <Aux>
+                <div className="Orders_NoOrder">
+                    <img src={emptyCart}  alt="EmptyCart" />
+                </div>
+                <p className="EmpryCart_Text"> Sorry Your cart is Empty</p>
+
+            </Aux>
         }else{
             const prices = this.props.data.getUserForCart.cart.map(book => book.bookId.price * book.quantity)
             totalPrice = prices.reduce((accumulator, currentValue) => accumulator + currentValue)
@@ -113,9 +122,9 @@ class Checkout extends Component{
                     status:"success",
                     content: "Your order have been recieved, you will recieve it in 2 days time"
                 })
-                this.props.history.push('/orders')
                 this.props.makeOrder()
                 this.props.emptyCart()
+                this.props.history.push('/orders')
                 .catch(err => {
                     if(err.graphQLErrors){
                         let errors = err.graphQLErrors.map(err => err.message)
@@ -128,32 +137,44 @@ class Checkout extends Component{
             },
             onClose: () => null
         }
-        let toRender = ""
-        if(!this.state.isLoggedIn){
-           
-            toRender = <div>
-                <p className="Checkout_Error_Text">Hei! i cant recognize you</p>
-            </div>
-        }else{
-            toRender =
-                <div className="Checkout_Wrapper">
-                    <div className="Checkout_Headers">
+        let payment = null 
+        let deHeader = null
+        if(this.state.cart && this.state.cart.length > 0){
+            deHeader = <Aux>
+                <div className="Checkout_Headers">
                         <p>My Cart</p>
                         <div className="Checkout_Price_Quantity">
                             <p>Quantity</p>
                             <p>Price</p>
                         </div>
-                    </div>
-                    <hr />
-                    {items}
-                    <div className="CheckOut_Totalprice">
+                </div>
+                <hr />
+            </Aux>
+            payment = <Aux>
+                <div className="CheckOut_Totalprice">
                         <p>Total:  ${totalPrice}</p>
                     </div>
                     <div className="Proceed_ToCheckout">
                             <PaystackConsumer {...config} >
                                 {({initializePayment}) => <button onClick={() => initializePayment()}>Pay ${totalPrice} </button>}
                             </PaystackConsumer>
+                </div>
+            </Aux>
+        }
+        let toRender = null
+        if(!this.state.isLoggedIn){
+            toRender = <Aux>
+                    <div className="Orders_NoOrder">
+                        <img src={Authenticate}  alt="EmptyCart" />
                     </div>
+                    <p className="EmpryCart_Text"> Sorry, please login to see your cart</p>
+                </Aux> 
+        }else{
+            toRender =
+                <div className="Checkout_Wrapper">
+                    {deHeader}
+                    {items}
+                    {payment}
                 </div>
         }
         return(

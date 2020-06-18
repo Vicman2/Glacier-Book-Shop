@@ -2,30 +2,28 @@
     display: flex;
     flex-direction: column;
     box-shadow: 3px 3px 3px #ccc;
-    padding: 10px 2px;
+    padding: 5px;
     font-family: 'Open Sans';
-    margin: 10px auto;
+    margin: 12px auto;
+}
+.Order:hover{
+    cursor: pointer;
+    box-shadow: 4px 4px 10px #ccc;
 }
 .Order p{
     font-size: 16px;
     text-align: center;
-    width: 100%;
+    width: 95%;
 }
 .Order_Id{
-    width: 38%;
     font-weight: 600;
 }
 .Order_Date{
-    width: 30%;
     color: rgba(0, 0, 0, 0.589);
 }
 .Order_Amount_Paid{
     font-weight: 600;
     text-align: right;
-    width: 20%;
-}
-.Order_Status{
-    width: 15%;
 }
 .Order_Amount_Paid span{
     background-color: green;
@@ -44,5 +42,16 @@
         flex-direction: row;
         align-items: center;
     }
-    
+    .Order_Id{
+        width: 38%;
+    }
+    .Order_Date{
+        width: 30%;
+    }
+    .Order_Amount_Paid{
+        width: 20%;
+    }
+    .Order_Status{
+        width: 10%;
+    }
 }

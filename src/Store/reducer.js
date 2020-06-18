@@ -7,6 +7,8 @@ const initialStore = {
     cart: [],
     showAuth: false, 
     showNotification: false,
+    showOrderDetails: false,
+    idOfOrderToShow: null, 
     notification: {
         content: "",
         status: "primary"
@@ -53,6 +55,17 @@ const reducer = (state = initialStore, action) => {
             return{
                 ...state,
                 showNotification: false
+            }
+        case actionTypes.SHOW_ORDER_DETAILS: 
+            return{
+                ...state, 
+                showOrderDetails: true,
+                idOfOrderToShow: action.orderId
+            }
+        case actionTypes.CANCEL_ORDER_DETAILS:
+            return{
+                ...state, 
+                showOrderDetails: false
             }
     }
     return state

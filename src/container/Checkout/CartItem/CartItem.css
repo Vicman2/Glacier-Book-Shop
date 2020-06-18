@@ -76,6 +76,7 @@ select option{
     }
     .CartItem_Second_Part{
         max-width: 120px;
+        margin-right: 70px;
         justify-content: space-around;
     }
 

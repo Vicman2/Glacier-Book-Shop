@@ -9,6 +9,7 @@
     width: 100vw;
     list-style: none;
     padding: 2px 10px;
+    font-weight: 500;
 }
 .Footer_Dark li, .Footer_Bright li{
     margin: auto 4px;

@@ -16,6 +16,8 @@ import Checkout from './container/Checkout/Checkout';
 import HarmburgerMenu from './components/NavBar/HamburgerMenu/HamburgerMenu';
 import Orders from './container/Orders/Orders';
 import About from './container/About/About';
+import OrderDetails from './container/OrderDetails/OrderDetails';
+import Profile from './components/Profile/Profile';
 
 class App extends Component{
   constructor(props){
@@ -23,8 +25,10 @@ class App extends Component{
     this.state = {
       clickedSignIn: false, 
       clickedLogin:false,
+      orderDetails: false,
       checkAuth: false,
-      harmburgerMenu: false
+      harmburgerMenu: false,
+      showProfile: false,
     }
   }
   componentDidMount(){
@@ -57,6 +61,9 @@ class App extends Component{
         clickedHarmburger={this.showHarmburger}
         showHamBurger={this.state.harmburgerMenu}
         />
+        <Profile 
+          show={this.state.showProfile}
+        />
         <HarmburgerMenu
           show={this.state.harmburgerMenu}
           clicked={this.showHarmburger}
@@ -68,6 +75,10 @@ class App extends Component{
          <Login
          show={this.state.clickedLogin}
          cancel={this.logInHandler}
+         />
+         <OrderDetails
+          show={this.props.showOrderDetails}
+          cancel={this.props.cancelOrderDetails}
          />
          <CheckAuth
           show ={this.props.showAuth}
@@ -99,14 +110,16 @@ const mapStateToProps = (state) => {
     cart: state.cart,
     showAuth: state.showAuth,
     showNotification: state.showNotification,
-    notification: state.notification
+    notification: state.notification, 
+    showOrderDetails: state.showOrderDetails
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     login : (token) => dispatch(actionCreators.login(token)),
-    cancelAuth: () => dispatch(actionCreators.cancelAuth())
+    cancelAuth: () => dispatch(actionCreators.cancelAuth()),
+    cancelOrderDetails: () => dispatch(actionCreators.cancelOrderDetails())
   }
 }
 

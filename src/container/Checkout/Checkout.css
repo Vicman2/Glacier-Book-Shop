@@ -13,8 +13,9 @@
     padding-top: 10px;
 }
 .Checkout_Headers{
+    padding: 2px 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
 }
@@ -58,7 +59,15 @@
     display: flex;
     justify-content: center;
 }
+.EmpryCart_Text{
+    font-family: 'Open Sans';
+    text-align: center;
+    font-weight: bolder;
+}
 @media(min-width: 800px){
+    .Checkout_Headers{
+        justify-content: space-around;
+    }
     .Checkout_Price_Quantity{
         margin-right: 0;
     }

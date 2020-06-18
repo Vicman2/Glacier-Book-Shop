@@ -38,6 +38,23 @@ const querys = {
                 }
             }
         }
+    `,
+    getOrder: gql`
+        query GetOrder($orderId : ID!){
+            getOrder(orderId: $orderId){
+                _id
+                totalPrice
+                orders{
+                    _id
+                    quantity
+                    book{
+                        _id
+                        title
+                        price
+                    }
+                }
+            }
+        }
     `
 }
 

@@ -1,0 +1,34 @@
+.OrderDetails{
+    color: grey;
+    padding: 20px 4px;
+}
+.OneOrderd_Book{
+    text-align: center;
+    display: flex;
+}
+.OneOrderd_Book_title{
+    padding-right: 10px;
+    text-align: left;
+    text-transform: capitalize;
+    width: 60%;
+}
+.OneOrderd_Book_Quantity{
+    padding-left: 4px;
+    width: 20%;
+}
+.OneOrderd_Book_Price{
+    width: 20%;
+}
+.OrderDetails_TotalPrice{
+    background-color: transparent;
+    color: #228FC0;
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+}
+.OneOrderd_Book_Header{
+    font-weight: bold;
+}

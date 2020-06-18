@@ -4,6 +4,7 @@ const mutation= {
     makeCart: gql`
         mutation MakeCart($books:[ID]!){
             makeCart(books: $books){
+                _id
                 cart{
                     _id
                 }
@@ -43,6 +44,7 @@ const mutation= {
                         price
                         imageUrl
                         author{
+                            _id
                             name
                         }
                     }
@@ -53,14 +55,21 @@ const mutation= {
     emptyCart: gql`
         mutation{
             emptyUserCart{
-            _id
+                _id
             }
         }
     `, 
     makeOrder: gql`
         mutation{
             makeOrder{
-            _id
+                _id
+            }
+        }
+    `, 
+    deleteOrder: gql`
+        mutation DeleteOrder($orderId: ID!){
+            deleteOrder(orderId: $orderId){
+                _id
             }
         }
     `

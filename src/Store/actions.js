@@ -6,6 +6,8 @@ export const SHOW_NOTIFICATION = "SHOW_NOTIFICATION"
 export const CANCEL_NOTIFICATION = "CANCEL_NOTIFICATION"
 export const GET_CART_ON_LOGIN = "GET_CART_CART_ON_LOGIN"
 export const UPDATE_CART= "UPDATECART"
+export const SHOW_ORDER_DETAILS = "SHOW_ORDER_DETAILS"
+export const CANCEL_ORDER_DETAILS = "CANCEL_ORDER_DETAILS"
 
 
 export const login = (token) => {
@@ -31,4 +33,10 @@ export const getCartOnLogin = (cart) => {
 }
 export const updateCart = (payload) => {
     return {type: UPDATE_CART, payload}
+}
+export const showOrderDetails = (orderId) => {
+    return {type: SHOW_ORDER_DETAILS, orderId }
+}
+export const cancelOrderDetails = () => {
+    return {type: CANCEL_ORDER_DETAILS}
 }

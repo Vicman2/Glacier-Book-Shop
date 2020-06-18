@@ -7,14 +7,24 @@ import noOrderSVG from './Assets/undraw_order_delivered_p6ba.svg'
 import Aux from '../../HOC/Aux'
 import Button from '../../components/UI/Button/Button'
 import Order from './Order/Order'
+import { connect } from 'react-redux'
 
 
 class Orders extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            refresh : false
+        }
     }
+    componentDidUpdate(prevProps){
+        if(prevProps.showOrderDetails !== this.state.refresh){
+            this.setState({refresh: this.props.showOrderDetails})
+            this.props.data.refetch()
+        }
+    }
+
     render(){
-        console.log(this.props.data)
         let toRender = null
         if(this.props.data.getOrders && this.props.data.getOrders.length === 0){
             toRender =<Aux>
@@ -46,7 +56,14 @@ class Orders extends Component{
     }
 }
 
+const stateMappedToProps = state => {
+    return {
+        showOrderDetails: state.showOrderDetails
+    }
+}
+
 
 export default compose(
+    connect(stateMappedToProps),
     graphql(query.getOrders)
 ) (Orders)
