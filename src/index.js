@@ -16,7 +16,7 @@ import { getInLocalStorage } from './Util/localStorage';
 
 const httpLink = createHttpLink({
   uri: 'https://dashboard.heroku.com/apps/glacier-api/graphql',
-  credentials: 'include'
+  credentials: 'include' 
 })
 
 const authLink = setContext((_, { headers }) => {
