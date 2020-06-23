@@ -1,0 +1,49 @@
+.Profile{
+    position: fixed;
+    border-radius: 10px 0 0 10px;
+    top: 0;
+    right: 0;
+    height: 150px;
+    width: 70%;
+    background-color: #e5e5e5;
+    z-index: 300;
+    padding: 10px;
+}
+.Profile_Cancel{
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0 2px 1px #CCC;
+}
+.Profile_Cancel p{
+    margin-bottom: 5px;
+}
+.Profile_Cancel ion-icon{
+    font-size: 24px;
+}
+.User_Name{
+    font-size: 24px;
+    margin: 2px auto;
+}
+.User_Email{
+    margin-top: 2px;
+    color: rgb(114, 113, 113);
+}
+.User_Phone{
+    text-align: right;
+}
+
+.Show_Profile{
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 200ms, transform 500ms;
+}
+.Hide_Profile{
+    opacity: 0;
+    transform: translateX(300%);
+    transition: opacity 20s, transform 500ms;
+}
+@media(min-width:800px){
+    .Profile{
+        width: 30%;
+    }
+}

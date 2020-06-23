@@ -17,7 +17,7 @@ import HarmburgerMenu from './components/NavBar/HamburgerMenu/HamburgerMenu';
 import Orders from './container/Orders/Orders';
 import About from './container/About/About';
 import OrderDetails from './container/OrderDetails/OrderDetails';
-import Profile from './components/Profile/Profile';
+import Profile from './container/Profile/Profile';
 
 class App extends Component{
   constructor(props){
@@ -51,6 +51,11 @@ class App extends Component{
       return {harmburgerMenu: !state.harmburgerMenu};
     })
   }
+  showProfileHandler = () => {
+    this.setState(state => {
+      return {showProfile: !state.showProfile}
+    })
+  }
   render(){
     return(
       <div className="App">
@@ -60,9 +65,11 @@ class App extends Component{
         clickedLogin={this.logInHandler}
         clickedHarmburger={this.showHarmburger}
         showHamBurger={this.state.harmburgerMenu}
+        showProfile = {this.showProfileHandler}
         />
         <Profile 
           show={this.state.showProfile}
+          cancel={this.showProfileHandler}
         />
         <HarmburgerMenu
           show={this.state.harmburgerMenu}

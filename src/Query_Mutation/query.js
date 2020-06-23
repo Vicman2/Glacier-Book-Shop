@@ -22,6 +22,16 @@ const querys = {
             }
         }
     `, 
+    getUser: gql`
+        {
+            getUser{
+                _id
+                name
+                email
+                phone
+            }
+        }
+    `,
     getOrders: gql`
         {
             getOrders{

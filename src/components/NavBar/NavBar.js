@@ -14,7 +14,7 @@ const NavBar = (props) => {
     const className = props.mode === "dark" ? "NavBar_Dark" : "NavBar_Bright"; 
     let Auth = null
     if(props.isLoggedIn){
-        Auth = <div className="profile-Icon" >
+        Auth = <div className="profile-Icon" onClick={props.showProfile} >
             <ion-icon name="person"></ion-icon>
         </div>
     }else{ 
