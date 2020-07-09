@@ -91,14 +91,14 @@ class Home extends Component{
 const getBooks = gql`
     {
         getBooks{
-        _id
-        title
-        description
-        imageUrl
-        price
-        author{
-            name
-        }
+            _id
+            title
+            description
+            imageUrl
+            price
+            author{
+                name
+            }
         }
     }
 `

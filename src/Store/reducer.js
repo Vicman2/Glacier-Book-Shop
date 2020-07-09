@@ -3,7 +3,7 @@ import * as actionTypes from './actions'
 const initialStore = {
     isLoggedIn : false,
     token: null,
-    bookImageEndpoint: 'http://localhost:5000/api/books/', 
+    bookImageEndpoint: 'https://glacier-api.herokuapp.com/api/books/', 
     cart: [],
     showAuth: false, 
     showNotification: false,
