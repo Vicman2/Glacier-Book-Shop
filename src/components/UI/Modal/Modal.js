@@ -34,6 +34,10 @@ const Modal = (props) => {
             </div>
         </div>
     }
+    let toLogin = <p>Have an account? <span className="switchingAuth" onClick={props.login}>Login </span> </p>
+    let toSignin = <p>Don't have an accout? <span className="switchingAuth" onClick={props.signIn}>Sign in </span></p>
+    let afterButton = null
+    if(props.auth) afterButton = <div className="afterBtn">{props.auth =="login" ? toLogin: toSignin} </div>
     return(
         <Aux>
             <Backdrop toggled={showModal} />
@@ -49,6 +53,7 @@ const Modal = (props) => {
                         {bt2}
                         
                     </div>
+                    {afterButton}
                 </div>
             </section>
         </Aux>

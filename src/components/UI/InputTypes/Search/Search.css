@@ -8,12 +8,13 @@
     left: 2px;
     top: 8px;
     color: white;
-    font-size: 16px;
+    font-size: 26px;
 }
 .SearchInput button{
     position: absolute;
-    right: 1px;
+    right: 0;
     padding: 1px;
+    bottom: 6px;
     top: 8px;
     background-color: #228FC0;
     color: black;
@@ -24,6 +25,7 @@
 .SearchInput input{
     width: 178px;
     margin: 8px 2px;
+    padding: 5px;
     padding-left: 20px;
     outline: none;
     font-family: inherit;

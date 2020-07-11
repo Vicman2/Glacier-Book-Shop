@@ -11,6 +11,7 @@ import querys from '../../Query_Mutation/query'
 import { graphql } from 'react-apollo'
 import mutation from '../../Query_Mutation/mutation'
 import Aux from '../../HOC/Aux'
+import Button from '../../components/UI/Button/Button'
 
 
 class Checkout extends Component{
@@ -48,8 +49,16 @@ class Checkout extends Component{
             variables:{
                 bookId: _id,
                 quantity: parseInt(quantity)
+            }, 
+            optimisticResponse: {
+                _typename: 'Mutation',
+                changeBookQuantity: {
+                    _typename: 'User',
+                    _id
+                }
             }
         }).then(res=> {
+            console.log(res.data)
             this.setState({cart: res.data.changeBookQuantity.cart})
         }).catch(err=> {
             if(err.graphQLErrors){
@@ -87,13 +96,16 @@ class Checkout extends Component{
         if(!this.props.data.getUserForCart){
             items = null
         }else if(this.state.cart.length === 0){
-            items = <Aux>
+            items = <div className="Order_feedback">
                 <div className="Orders_NoOrder">
                     <img src={emptyCart}  alt="EmptyCart" />
                 </div>
                 <p className="EmpryCart_Text"> Sorry Your cart is Empty</p>
+                <div className="Order_MakeOrder_btn">
+                        <Button mode="dark" name="Buy a book" clicked={()=> this.props.history.push('/')} />
+                </div>
 
-            </Aux>
+            </div>
         }else{
             const prices = this.props.data.getUserForCart.cart.map(book => book.bookId.price * book.quantity)
             totalPrice = prices.reduce((accumulator, currentValue) => accumulator + currentValue)

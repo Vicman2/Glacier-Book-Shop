@@ -27,15 +27,15 @@ class Orders extends Component{
     render(){
         let toRender = null
         if(this.props.data.getOrders && this.props.data.getOrders.length === 0){
-            toRender =<Aux>
+            toRender =<div className="Order_feedback">
                 <div className="Orders_NoOrder">
                    <img src={noOrderSVG} alt="noOrder" />
-               </div>
-               <p className="Orders_NoOrder_Text">You have no order yet, try making order by selecting a book you want to buy</p>
-               <div className="Order_MakeOrder_btn">
-                    <Button mode="dark" name="Buy a book" clicked={()=> this.props.history.push('/')} />
-               </div>
-            </Aux>  
+                </div>
+                <p className="Orders_NoOrder_Text">You have no order yet, try making order by selecting a book you want to buy</p>
+                <div className="Order_MakeOrder_btn">
+                        <Button mode="dark" name="Buy a book" clicked={()=> this.props.history.push('/')} />
+                </div>
+            </div>  
         }else if(this.props.data.getOrders && this.props.data.getOrders.length > 0){
             toRender = this.props.data.getOrders.map(order => (
                 <Order 

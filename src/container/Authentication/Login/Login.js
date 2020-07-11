@@ -177,6 +177,8 @@ class Login extends Component{
             onClickButton1={this.props.cancel}
             onClickButton2={this.onSubmitHandler}
             loading2={this.state.loading}
+            auth="signIn"
+            signIn= {this.props.toSignin}
             >
                 <p className={subMitErrorClass.join(" ")}>{this.state.invalidFormErrorMessage} </p>
                 {displayError}

@@ -75,7 +75,7 @@ const FORM_INPUTS=  {
         elemType: "input", 
         config: {
             type: 'password', 
-            placeholder: "password"
+            placeholder: "Password"
         },
         value:"",
         validation: function(){
@@ -198,12 +198,15 @@ class SignIn extends Component{
         return(
             <Modal
             title="Please sign up"
-            button1Name="cancel"
+            button1Name="Cancel"
             button2Name="Sign Up"
+            afterBtn='Have an account ? <span className="switch_Auth">Login</span>'
             show={this.props.show}
             onClickButton1={this.props.cancel}
             onClickButton2={this.onSubmitHandler}
             loading2={this.state.loading}
+            auth="login"
+            login={this.props.toLogin}
             >
                 <p className={subMitErrorClass.join(" ")}>{this.state.invalidFormErrorMessage} </p>
                 {displayError}

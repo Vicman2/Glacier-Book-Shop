@@ -11,3 +11,11 @@
 .Show__Error{
     display: block;
 }
+.authSwitch{
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
+.switch_Auth{
+    color: 228FC0;
+}

@@ -47,12 +47,22 @@
     z-index: 100 !important;
     color:#228FC0 ;
 }
+.SigningUp{
+        display: none; 
+}
+.AuthButtons{
+    display: flex;
+}
 
-@media(min-width: 800px){
+@media(min-width: 1000px){
     .Nav_Search_Input{
         display: block;
     }
     .CartBox{
         display: none;
     }
+    .SigningUp{
+        display: block;
+    }
+    
 }

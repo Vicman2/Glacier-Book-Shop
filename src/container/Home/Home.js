@@ -34,7 +34,6 @@ class Home extends Component{
         let booksForCard = [];
         let booksToDisplay = <div></div>;
         if(!this.props.data.loading){
-            console.log(this.state.books)
             booksToSlide = this.state.books.filter((book, index) => index <15)
             booksToSlide = booksToSlide.reverse()
             booksForCard= this.state.books.filter((book, index) => index > 3 && index <=6)

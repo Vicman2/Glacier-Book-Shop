@@ -56,6 +56,17 @@
     transform: translateY(-100%);
     transition: opacity 20s, transform 500ms;
 }
+.afterBtn{
+    text-align: center;
+    padding: 10px 5px;
+    color: grey;
+}
+.switchingAuth{
+    color: #228FC0;
+}
+.switchingAuth:hover    {
+    cursor: pointer;
+}
 @media(min-width: 500px){
     .Modal_Content{
         width: 70%;

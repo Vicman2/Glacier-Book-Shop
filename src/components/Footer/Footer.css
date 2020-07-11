@@ -16,6 +16,8 @@
 }
 
 .Footer_Dark ul, .Footer_Bright ul{
+    margin-inline-start: 0;
+    padding-inline-start: 0;
     list-style: none;
 }
 .Footer_Logo{

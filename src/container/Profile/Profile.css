@@ -42,6 +42,18 @@
     transform: translateX(300%);
     transition: opacity 20s, transform 500ms;
 }
+.logout{
+    border: 1px solid #e5e5e5;
+    color: rgb(197, 68, 68);
+    text-align: center;
+    padding: 10px 15px;
+    margin-top: 20px;
+}
+.logout:hover, .logout:focus{
+    border: 1px solid rgb(197, 68, 68) !important;
+    cursor: pointer;
+}
+
 @media(min-width:800px){
     .Profile{
         width: 30%;

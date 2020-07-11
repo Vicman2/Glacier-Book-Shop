@@ -2,10 +2,9 @@
     padding-top: 0;
     width:140px;
     margin: 4px 10px;
-    max-height: 250px;
+    height: 300px;
 }
 .BookInHome:hover{
-    width:145px;
     cursor: pointer;
 }
 
@@ -19,6 +18,10 @@
 }
 
 .BookInHome_Detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 60px;
     padding-left: 3px;
     background-color: white;
     color: #000000;

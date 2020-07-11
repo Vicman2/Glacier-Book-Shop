@@ -1,10 +1,21 @@
+.Orders{
+    width:100%;
+}
+
 .Orders_Header{
     text-align: center;
     font-weight: bolder;
     font-size: 30px;
 }
+.Order_feedback{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .Orders_NoOrder{
     display: flex;
+    justify-content: center;
     padding: 20px;
     width: 95;
     height: 70%;

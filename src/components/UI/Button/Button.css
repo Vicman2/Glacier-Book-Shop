@@ -3,7 +3,7 @@
     border: 1px solid #228FC0;
     outline: none;
     color: white;
-    padding: 3px 7px;
+    padding: 10px 20px;
     border-radius: 50px;
     font-weight: bolder;
     letter-spacing: 1.5px;
@@ -34,4 +34,11 @@
 .Button_White:hover{
     background-color: #228FC0;
     color: #ffffff;
+}
+@media(min-width: 800px){
+    .Button_Dark, .Button_Bright, .Button_White{
+        padding: 5px 10px;
+        border-radius: 50px;
+        font-size: 18px;
+    }
 }

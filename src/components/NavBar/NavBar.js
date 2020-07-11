@@ -5,6 +5,7 @@ import './NavBar.css'
 import Aux from '../../HOC/Aux'
 import NavItems from './NavItems/NavItems'
 import Button from '../UI/Button/Button'
+import Profile from '../../container/Profile/Profile'
 import { connect } from 'react-redux'
 import Harmburger from '../UI/Harmburger/Harmburger'
 import { withRouter } from 'react-router-dom'
@@ -18,13 +19,19 @@ const NavBar = (props) => {
             <ion-icon name="person"></ion-icon>
         </div>
     }else{ 
-        Auth = <Aux>
-                <Button mode="dark" name="SignUp" clicked={props.clickedSignIn}/>
+        Auth = <div className="AuthButtons">
+                <div className="SigningUp">
+                    <Button mode="dark" name="SignUp" clicked={props.clickedSignIn}/>
+                </div>
                 <Button  name="Login"  clicked={props.clickedLogin}/>
-        </Aux>
+        </div>
     }
     return(
         <Aux>
+            <Profile 
+            show={props.seeProfile}
+            cancel={props.showProfile}
+            />
             <div className={className}>
                 <div className="Nav_HarmBurger">
                     <Harmburger 

@@ -5,10 +5,16 @@ import {flowRight as compose} from 'lodash'
 import './Profile.css'
 import { graphql } from 'react-apollo'
 import Backdrop from '../../components/UI/Backdrop/Backdrop'
+import { withRouter } from 'react-router-dom'
 
 
 
 class Profile extends Component{
+    logout = ()=> {
+        localStorage.removeItem("token");
+        this.props.history.push('/');
+        this.props.cancel();
+    }
     render(){
         let classes = ["Profile"]
         if(this.props.show){
@@ -32,6 +38,7 @@ class Profile extends Component{
                         <p onClick={this.props.cancel}> <ion-icon name="close"></ion-icon></p>
                     </div>
                     {userProfile}
+                    <p className="logout" onClick={this.logout}>Logout</p>
                 </div>
             </Aux>
         )
@@ -41,5 +48,6 @@ class Profile extends Component{
 
 
 export default compose(
+    withRouter,
     graphql(querys.getUser)
 ) (Profile)
