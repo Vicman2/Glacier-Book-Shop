@@ -5,13 +5,16 @@ import {flowRight as compose} from 'lodash'
 import './Profile.css'
 import { graphql } from 'react-apollo'
 import Backdrop from '../../components/UI/Backdrop/Backdrop'
+import  * as actionTypes from '../../Store/actions'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 
 
 class Profile extends Component{
     logout = ()=> {
         localStorage.removeItem("token");
+        this.props.logout()
         this.props.history.push('/');
         this.props.cancel();
     }
@@ -45,9 +48,15 @@ class Profile extends Component{
     }
 
 }
+const mapActionToProps = dispatch => {
+    return{
+        logout: () => dispatch(actionTypes.logUserOut())
+    }
+}
 
 
 export default compose(
+    connect(null, mapActionToProps),
     withRouter,
     graphql(querys.getUser)
 ) (Profile)

@@ -8,6 +8,7 @@ export const GET_CART_ON_LOGIN = "GET_CART_CART_ON_LOGIN"
 export const UPDATE_CART= "UPDATECART"
 export const SHOW_ORDER_DETAILS = "SHOW_ORDER_DETAILS"
 export const CANCEL_ORDER_DETAILS = "CANCEL_ORDER_DETAILS"
+export const LOG_USER_OUT = "LOG_USER_OUT"
 
 
 export const login = (token) => {
@@ -39,4 +40,7 @@ export const showOrderDetails = (orderId) => {
 }
 export const cancelOrderDetails = () => {
     return {type: CANCEL_ORDER_DETAILS}
+}
+export const logUserOut = ()=> {
+    return {type : LOG_USER_OUT}
 }
