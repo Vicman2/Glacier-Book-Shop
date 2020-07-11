@@ -103,6 +103,9 @@
     .Preview_ImageContainer_Review{
         margin-right: 30px;
     } 
+    .Preview_BookTitle{
+        padding-left: 0;
+    }
     .Preview_Text_Details{
         display: block;
     }
