@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import Harmburger from '../UI/Harmburger/Harmburger'
 import { withRouter } from 'react-router-dom'
 import {flowRight as compose} from 'lodash'
+import SearchBook from '../../container/searchBook/searchBook'
 
 const NavBar = (props) => {
     const className = props.mode === "dark" ? "NavBar_Dark" : "NavBar_Bright"; 
@@ -45,7 +46,7 @@ const NavBar = (props) => {
                     <img src={logo} alt="Logo" />
                 </div>
                 <div className="Nav_Search_Input">
-                    <SearchInput />
+                    <SearchBook />
                 </div>
                 <NavItems />
                 <div className="Nav_Auth">

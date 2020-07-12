@@ -9,6 +9,7 @@ const initialStore = {
     showNotification: false,
     showOrderDetails: false,
     idOfOrderToShow: null, 
+    showFoundProducts:false,
     notification: {
         content: "",
         status: "primary"
@@ -72,6 +73,11 @@ const reducer = (state = initialStore, action) => {
                 ...state, 
                 isLoggedIn: false, 
                 token: null
+            }
+        case actionTypes.SHOW_FOUND_PRODUCTS:
+            return {
+                ...state, 
+                showFoundProducts: !state.showFoundProducts
             }
     }
     return state
