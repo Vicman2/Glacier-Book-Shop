@@ -5,7 +5,9 @@ import querys from '../../Query_Mutation/query'
 import SearchInput from '../../components/UI/InputTypes/Search/Search'
 import Aux from "../../HOC/Aux";
 import { connect } from "react-redux";
-import { graphql, withApollo } from "react-apollo";
+import {withApollo } from "react-apollo";
+import FoundProducts from "./foundProducts/foundProducts";
+import { withRouter } from "react-router-dom";
 
 
 
@@ -13,6 +15,7 @@ import { graphql, withApollo } from "react-apollo";
 
 class SearchBook extends Component{
     state = {
+        founds : [],
         isFormValid: false,
         loading: false,
         isSubmited: false,
@@ -77,6 +80,7 @@ class SearchBook extends Component{
                 }
             })
             .then(data => {
+                this.setState({founds: data.data.searchBook})
                 this.props.showFoundBooks()
             }).catch(err => {
                 if(err.graphQLErrors){
@@ -92,6 +96,9 @@ class SearchBook extends Component{
     render(){
         return (
             <Aux>
+                <FoundProducts 
+                founds={this.state.founds}
+                />
                 <SearchInput
                 elemType={this.state.FORM_INPUTS.searchName.elemType}
                 config={this.state.FORM_INPUTS.searchName.config}
@@ -117,6 +124,7 @@ const actionMappedToProps = dispatch => {
 
 
 export default  compose(
+    withRouter,
     withApollo,
     connect(null, actionMappedToProps),
 ) (SearchBook)

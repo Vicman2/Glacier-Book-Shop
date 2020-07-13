@@ -69,6 +69,7 @@ const querys = {
     searchBook: gql`
         query SearchBook($bookName: String!){
             searchBook(bookName: $bookName){
+                _id
                 title
             }    
         }

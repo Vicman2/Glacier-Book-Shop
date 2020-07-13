@@ -18,6 +18,7 @@ import Orders from "./container/Orders/Orders";
 import About from "./container/About/About";
 import OrderDetails from "./container/OrderDetails/OrderDetails";
 import Profile from "./container/Profile/Profile";
+import NotFound from "./components/404/404";
 
 class App extends Component {
   constructor(props) {
@@ -98,11 +99,12 @@ class App extends Component {
           clickedLogIn={this.logInHandler}
         />
         <Switch>
+          <Route path="/" exact component={Home} />
           <Route path="/product/:id" component={Preview} />
           <Route path="/cart" component={Checkout} />
           <Route path="/orders" component={Orders} />
           <Route path="/about" component={About} />
-          <Route path="/" exact component={Home} />
+          <Route path="*" component={NotFound} />
         </Switch>
         <Notification
           show={this.props.showNotification}

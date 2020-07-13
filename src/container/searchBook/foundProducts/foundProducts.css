@@ -1,4 +1,12 @@
-
+.FoundProducts{
+    position: fixed;
+    top: 50px;
+    background-color: aliceblue;
+    z-index: 300;
+    padding: 2px;
+    max-width: 250px;
+    min-width: 250px;
+}
 
 .Show_FoundBooks{
     display: block;
@@ -6,4 +14,12 @@
 
 .Hide_FoundBooks{
     display: none;
+}
+.BookFound{
+    box-shadow: 0 2px 2px #ccc;
+    text-transform: capitalize;
+    padding: 10px;
+}
+.BookFound:hover{
+    cursor: pointer;
 }
