@@ -7,7 +7,7 @@ const NotFound = (props) => {
     return(
         <div>
             <div className="Wrapper_SVG">
-                <img src={notFoundSVG} />
+                <img src={notFoundSVG} alt="404" />
             </div>
             <p className="Wrapper_SVG_Text" onClick={() => props.history.push('/')}>To home </p>
         </div>

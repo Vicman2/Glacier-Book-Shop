@@ -6,6 +6,9 @@
     color: #f5f5f5;
     margin: 7px auto;
 }
+.BookCard:hover{
+    cursor: pointer;
+}
 .BookCard_Content{
     display: flex;
     flex-direction: column;

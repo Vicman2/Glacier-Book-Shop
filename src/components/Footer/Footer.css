@@ -47,6 +47,11 @@
     background-color: #0c0c0cf8;
     color: #E5E5E5
 }
+.Footer_Dark a{
+    color: #E5E5E5;
+    text-decoration: none;
+    border: none;
+}
 .Footer_Bright{
     background-color: #E5E5E5;
 }

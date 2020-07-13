@@ -2,6 +2,7 @@ import React from 'react'
 import './Footer.css'
 import Aux from '../../HOC/Aux'
 import logo from './Assets/logo.png'
+import { NavLink } from 'react-router-dom'
 
 
 const Footer = (props)=> {
@@ -13,20 +14,9 @@ const Footer = (props)=> {
                     <img src={logo} alt="logo" />
                 </div>
                 <ul className="Footer_Norm">
-                    <li>Home</li>
-                    <li>Register</li>
-                    <li>About</li>
-                    <li>My cart</li>
-                </ul>
-                <ul className="Footer_Norm">
-                    <li>Privacy </li>
-                    <li>Terms and condition </li>
-                    <li>Terms of user </li>
-                </ul>
-                <ul className="Footer_Norm">
-                    <li>Copy writer </li>
-                    <li>Glacier</li>
-                    <li> Policy</li>
+                    <li>{<NavLink exact to="/">Home</NavLink>} </li>
+                    <li>{<NavLink to="/about">About</NavLink>} </li>
+                    <li>{<NavLink to="/cart">Cart</NavLink>} </li>
                 </ul>
                 <ul className="Footer_Abnorm">
                     <li>Designed by Offordile Victor(Vicman)</li>

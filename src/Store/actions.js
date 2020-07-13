@@ -10,6 +10,7 @@ export const SHOW_ORDER_DETAILS = "SHOW_ORDER_DETAILS"
 export const CANCEL_ORDER_DETAILS = "CANCEL_ORDER_DETAILS"
 export const LOG_USER_OUT = "LOG_USER_OUT"
 export const SHOW_FOUND_PRODUCTS = "SHOW_FOUND_PRODUCTS"
+export const UPDATE_CART_NUM = "UPDATE_CART_NUM"
 
 
 export const login = (token) => {
@@ -47,4 +48,7 @@ export const logUserOut = ()=> {
 }
 export const showFoundProducts = () => {
     return { type : SHOW_FOUND_PRODUCTS}
+}
+export const updateCartNum = (cartNum)=> {
+    return{type: UPDATE_CART_NUM, cartNum}
 }

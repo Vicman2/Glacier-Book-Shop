@@ -11,7 +11,7 @@ const BookSlide = (props) => {
     const src = props.imageEndpoint + props.imageUrl
     return(
         <Aux>
-            <div className="BookSlide">
+            <div onClick={() => props.history.push(`/product/${props.id}`)} className="BookSlide">
                 <div className="BookSlide_Text">
                     <p className="BookSlide_Title"> {props.name.toUpperCase()} </p>
                     <p className="BookSlide_Quote"> {props.quote} </p>

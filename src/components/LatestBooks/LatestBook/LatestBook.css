@@ -8,6 +8,9 @@
     border-radius: 12px;
     margin: 13px auto;
 }
+.LatestBook:hover{
+    cursor: pointer;
+}
 
 .LatestBook_Image_Container{
     position: absolute;

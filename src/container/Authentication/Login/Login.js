@@ -111,10 +111,11 @@ class Login extends Component{
             }).then(res => {
                 this.setState({loading: false})
                 const {token} = res.data.login
-                if(this.props.cart.length>0){
+                const cart = JSON.parse(localStorage.getItem('cart'))
+                if( cart && cart.cartIds.length > 0){
                     this.props.mutate({
                         variables: {
-                            books: this.props.cart
+                            books: cart.cartIds
                         }
                     }).then(res => {
                         this.props.updateCart(res.data.logIn)
@@ -124,17 +125,18 @@ class Login extends Component{
                     })
                 }
                 setInLocalStorage("token", token, 3600000);
+                localStorage.removeItem('cart')
                 this.props.login(token)
                 this.setState({formInputs: FORM_INPUTS});
                 this.props.cancel()
 
             }).catch(err=> {
                 this.setState({loading: false})
-                const errors = err.graphQLErrors.map(error => error.message);
-                this.setState({errors});
+                if(err.graphQLErrors){
+                    const errors = err.graphQLErrors.map(error => error.message);
+                    this.setState({errors});
+                }
             })
-            
-            
         }
     }
     render(){

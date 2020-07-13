@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom'
 const BookCard = (props) => {
     const deSource = props.imageEndPoint + props.imageUrl
     return (
-        <div className="BookCard">
+        <div className="BookCard" onClick={()=> props.history.push(`/product/${props.id}`)}>
             <div className="BookCard_Image_Container">
                 <img src={deSource} alt={props.title}/>
             </div>

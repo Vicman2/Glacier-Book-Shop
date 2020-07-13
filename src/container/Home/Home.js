@@ -21,6 +21,7 @@ class Home extends Component{
         }
     }
     componentDidMount(){
+        window.scrollTo(0, 0)
         if(this.props.data.getBooks){
             this.setState({books : this.props.data.getBooks})
         }

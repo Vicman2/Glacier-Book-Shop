@@ -16,6 +16,9 @@ class Orders extends Component{
             refresh : false
         }
     }
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     componentDidUpdate(prevProps){
         if(prevProps.showOrderDetails !== this.state.refresh){
             this.setState({refresh: this.props.showOrderDetails})

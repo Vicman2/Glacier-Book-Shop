@@ -8,19 +8,24 @@
     padding: 20px 50px;
     height: 380px;
 }
+.BookSlide:hover{
+    cursor: pointer;
+}
 .BookSlide_Text{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-top: 10px;
 }
 .BookSlide_Title{
-    font-size: 32px;
+    font-size: 24px;
     padding: 0;
     margin: 0px auto;
 }.BookSlide_Quote{
     font-style: italic;
+    font-size: 16px;
 }
 .BookSlide_CheckNow_Button{
     display: flex;
@@ -56,7 +61,7 @@
 
 @media(min-width:800px){
     .BookSlide_Title{
-        font-size: 45px;
+        font-size: 30px;
     }
     .BookSlide{
         flex-direction: row;

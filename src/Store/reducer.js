@@ -10,6 +10,7 @@ const initialStore = {
     showOrderDetails: false,
     idOfOrderToShow: null, 
     showFoundProducts:false,
+    numberOfCartElem: null,
     notification: {
         content: "",
         status: "primary"
@@ -78,6 +79,11 @@ const reducer = (state = initialStore, action) => {
             return {
                 ...state, 
                 showFoundProducts: !state.showFoundProducts
+            }
+        case actionTypes.UPDATE_CART_NUM: 
+            return{
+                ...state, 
+                numberOfCartElem : action.cartNum
             }
     }
     return state

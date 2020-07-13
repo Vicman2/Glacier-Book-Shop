@@ -11,6 +11,8 @@ import { capitalizeFirstWord } from '../../Util/stringHelperFunctions'
 import * as actionTypes from '../../Store/actions'
 import Aux from '../../HOC/Aux'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
+import noDataSVG from './Assets/undraw_no_data_qbuo.svg'
+import { setInLocalStorage } from '../../Util/localStorage'
 
 class Preview extends Component{
     constructor(props){
@@ -18,6 +20,10 @@ class Preview extends Component{
         this.state = {
 
         }
+    }
+
+    componentDidMount(){
+        window.scrollTo(0,0)
     }
 
     addToCart = (id) =>{
@@ -39,20 +45,33 @@ class Preview extends Component{
                     content: errors
                 })
             })
-        }
-        const exist = this.props.cart.find(prodId => prodId === id)
-        if(exist){
-            this.props.showCartNotification({
-                status: "primary", 
-                content: "Book is in cart already"
-            })
         }else{
-            this.props.addToCart(id);
-            this.props.showCartNotification({
-                status: "success", 
-                content: "Book have been added to cart successfully"
-            })
+            let  cartInLS = JSON.parse(localStorage.getItem('cart'));
+            if(!cartInLS){
+                let cart = {
+                    cartIds : [id]
+                }
+                cart = JSON.stringify(cart)
+                localStorage.setItem('cart', cart)
+            }else{
+                const exist = cartInLS.cartIds.find(oneId => oneId == id)
+                if(exist){
+                    this.props.showCartNotification({
+                        status: "primary", 
+                        content: "Book is in cart already"
+                    })
+                }else{
+                    cartInLS.cartIds.push(id)
+                    cartInLS = JSON.stringify(cartInLS)
+                    localStorage.setItem('cart', cartInLS)
+                    this.props.showCartNotification({
+                        status: "success", 
+                        content: "Book have been added to cart successfully"
+                    })
+                }
+            }
         }
+        console.log(localStorage.getItem('cart'))
     }
     buyBook = (id) => {
         this.props.addToCart(id);
@@ -87,65 +106,82 @@ class Preview extends Component{
     render(){
         const book = {...this.props.data.getBook}
         let src = ""
+        let toRender = null
         if(!this.props.data.loading){
             src = this.props.imageEndpoint + book.imageUrl
         }
-        return(
-            <Aux>
+        if(this.props.data.error){
+            toRender =  <Aux>
+                <div className="Wrapper_SVG">
+                    <img  src={noDataSVG}  alt="EmptyCart" />
+                </div>
+                <p className="EmpryCart_Text"> Sorry, the book do not exist</p>
+                <div className="Order_MakeOrder_btn">
+                        <Button mode="dark" name="Buy a book" clicked={()=> this.props.history.push('/')} />
+                </div>
+            </Aux>
+        }else{
+            toRender =<Aux>
                 
-                <div className="Preview">
-                    <div className="Preview_ImageContainer_Review"> 
-                        <img src={src} alt="" />
+        <div className="Preview">
+            <div className="Preview_ImageContainer_Review"> 
+                <img src={src} alt="" />
+            </div>
+            <div className="Preview_Text_Details">
+                <p className="Preview_BookTitle"> {book.title ? capitalizeFirstWord(book.title) : ""} </p>
+                <p className="Preview_AuthorName"> {book.author? capitalizeFirstWord (book.author.name) : ""} (Author) </p>
+                <p className="Preview_Rating">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </p>
+                <p>${book.price} </p>
+                <div className="Preview_ButtonWrapper">
+                    <Button name="Buy Now" clicked={() => this.buyBook(book._id)} />
+                    <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
+                </div>
+                <p className="Preview_Description_Title">Description</p>
+                <p className="Preview_Desciption"> {book.description} </p>
+                <p className="Product_Detail_Title">Product Details</p>
+                <div className="Preview_Details">
+                    <div className="Detail_Key">
+                        <p>Paperback</p>
+                        <p>Published </p>
+                        <p>Title</p>
+                        <p>ISBN</p>
+                        <p>Language</p>
                     </div>
-                    <div className="Preview_Text_Details">
-                        <p className="Preview_BookTitle"> {book.title ? capitalizeFirstWord(book.title) : ""} </p>
-                        <p className="Preview_AuthorName"> {book.author? capitalizeFirstWord (book.author.name) : ""} (Author) </p>
-                        <p className="Preview_Rating">
-                            <ion-icon name="star-outline"></ion-icon>
-                            <ion-icon name="star-outline"></ion-icon>
-                            <ion-icon name="star-outline"></ion-icon>
-                            <ion-icon name="star-outline"></ion-icon>
-                            <ion-icon name="star-outline"></ion-icon>
-                        </p>
-                        <p>${book.price} </p>
-                        <div className="Preview_ButtonWrapper">
-                            <Button name="Buy Now" clicked={() => this.buyBook(book._id)} />
-                            <Button name="Add To Cart" mode="dark" iconName="cart" clicked={()=>this.addToCart(book._id)}/>
+                    <div className="Detail_Value">
+                        <p> {book.details? book.details.paperBack: ""} </p>
+                        <p> {book.details? book.details.published: ""} </p>
+                        <p> {book.details? capitalizeFirstWord(book.title): ""} </p>
+                        <p> {book.details? book.details.ISBN: ""} </p>
+                        <p> {book.details? book.details.language: ""} </p>
+                    </div>
+                </div>
+                <div>
+                    <p className="Preview_About_The_Author">About the Author</p>
+                    <div className="Preview_Author_Details">
+                        <div className="Preview_Author_Image_Container">
+                            <img src={bookImage}  alt=""/>
                         </div>
-                        <p className="Preview_Description_Title">Description</p>
-                        <p className="Preview_Desciption"> {book.description} </p>
-                        <p className="Product_Detail_Title">Product Details</p>
-                        <div className="Preview_Details">
-                            <div className="Detail_Key">
-                                <p>Paperback</p>
-                                <p>Published </p>
-                                <p>Title</p>
-                                <p>ISBN</p>
-                                <p>Language</p>
-                            </div>
-                            <div className="Detail_Value">
-                                <p> {book.details? book.details.paperBack: ""} </p>
-                                <p> {book.details? book.details.published: ""} </p>
-                                <p> {book.details? capitalizeFirstWord(book.title): ""} </p>
-                                <p> {book.details? book.details.ISBN: ""} </p>
-                                <p> {book.details? book.details.language: ""} </p>
-                            </div>
-                        </div>
-                        <div>
-                            <p className="Preview_About_The_Author">About the Author</p>
-                            <div className="Preview_Author_Details">
-                                <div className="Preview_Author_Image_Container">
-                                    <img src={bookImage}  alt=""/>
-                                </div>
-                                <div className="Preview_Author">
-                                    <p>{book.author? book.author.website : ""} </p>
-                                    <p>Member since December 2019</p>
-                                </div>
-                            </div>
+                        <div className="Preview_Author">
+                            <p>{book.author? book.author.website : ""} </p>
+                            <p>Member since December 2019</p>
                         </div>
                     </div>
                 </div>
-                <LatestBooks />
+            </div>
+        </div>
+        <LatestBooks />
+    </Aux>
+        }
+        
+        return(
+            <Aux>
+                {toRender}
             </Aux>
         )
     }

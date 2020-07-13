@@ -7,8 +7,12 @@ import { withRouter } from 'react-router-dom'
 
 const LatestBook = (props) => {
     const src = props.imageEndPoint + props.imageUrl
+    const clicked = () => {
+        props.history.push(`/product/${props.id}`)
+        window.scrollTo(0,0)
+    }
     return(
-        <div className="LatestBook">
+        <div onClick={clicked} className="LatestBook">
             <div className="LatestB00k_Text_Button">
                 <p className="LatestBook_Title"> {props.title.toUpperCase()} </p>
                 <p className="LatestBook_Author"> {capitalizeFirstWord(props.author)} </p>

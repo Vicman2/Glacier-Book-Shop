@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from './Assets/logo.png'
-import SearchInput from '../UI/InputTypes/Search/Search'
 import './NavBar.css'
 import Aux from '../../HOC/Aux'
 import NavItems from './NavItems/NavItems'
@@ -49,11 +48,12 @@ const NavBar = (props) => {
                     <SearchBook />
                 </div>
                 <NavItems />
-                <div className="Nav_Auth">
-                    {Auth}
-                </div>
                 <div className="CartBox" onClick={() => props.history.push('/cart')}>
                     <ion-icon name="cart"></ion-icon>
+                    <span className="Cart_Number">3</span>
+                </div>
+                <div className="Nav_Auth">
+                    {Auth}
                 </div>
             </div>
         </Aux>

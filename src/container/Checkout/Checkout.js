@@ -38,6 +38,7 @@ class Checkout extends Component{
         }
     }
     componentDidMount(){
+        window.scrollTo(0,0)
        setTimeout(() => {
            if(!this.props.isLoggedIn){
                this.props.showAuth();
@@ -49,16 +50,8 @@ class Checkout extends Component{
             variables:{
                 bookId: _id,
                 quantity: parseInt(quantity)
-            }, 
-            optimisticResponse: {
-                _typename: 'Mutation',
-                changeBookQuantity: {
-                    _typename: 'User',
-                    _id
-                }
             }
         }).then(res=> {
-            console.log(res.data)
             this.setState({cart: res.data.changeBookQuantity.cart})
         }).catch(err=> {
             if(err.graphQLErrors){
@@ -97,8 +90,8 @@ class Checkout extends Component{
             items = null
         }else if(this.state.cart.length === 0){
             items = <div className="Order_feedback">
-                <div className="Orders_NoOrder">
-                    <img src={emptyCart}  alt="EmptyCart" />
+                <div className="Wrapper_SVG">
+                    <img  src={emptyCart}  alt="EmptyCart" />
                 </div>
                 <p className="EmpryCart_Text"> Sorry Your cart is Empty</p>
                 <div className="Order_MakeOrder_btn">
@@ -176,7 +169,7 @@ class Checkout extends Component{
         let toRender = null
         if(!this.state.isLoggedIn){
             toRender = <Aux>
-                    <div className="Orders_NoOrder">
+                    <div className="Wrapper_SVG">
                         <img src={Authenticate}  alt="EmptyCart" />
                     </div>
                     <p className="EmpryCart_Text"> Sorry, please login to see your cart</p>

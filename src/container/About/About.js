@@ -10,6 +10,9 @@ import './About.css'
 import Button from '../../components/UI/Button/Button'
 
 class About extends Component{
+    componentDidMount(){
+        window.scrollTo(0,0)
+    }
     render(){
         AOS.init()
         return(
