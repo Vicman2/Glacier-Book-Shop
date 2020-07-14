@@ -29,6 +29,9 @@ const querys = {
                 name
                 email
                 phone
+                cart{
+                    _id
+                }
             }
         }
     `,
@@ -71,7 +74,7 @@ const querys = {
             searchBook(bookName: $bookName){
                 _id
                 title
-            }    
+            }  
         }
     `
 }

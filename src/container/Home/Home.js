@@ -3,10 +3,30 @@ import gql from 'graphql-tag'
 import './Home.css'
 import Aux from '../../HOC/Aux'
 import BookSides from '../../components/BookSlides/BookSlides'
-import { graphql } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
 import BookCards from '../../components/BookCards/BookCards'
 import BookInHome from '../../components/BookInHome/BookInHome'
 import LatestBooks from '../../components/LatestBooks/LatestBooks'
+import { compose } from 'redux'
+
+
+
+const getBooks = gql`
+    {
+        getBooks{
+            _id
+            title
+            description
+            imageUrl
+            price
+            author{
+                name
+            }
+        }
+    }
+` 
+
+
 
 class Home extends Component{
     constructor(props){
@@ -25,7 +45,6 @@ class Home extends Component{
         if(this.props.data.getBooks){
             this.setState({books : this.props.data.getBooks})
         }
-
     }
     goToPreview = (id) => {
         this.props.history.push(`/product/${id}`)
@@ -88,19 +107,9 @@ class Home extends Component{
     }
 }
 
-const getBooks = gql`
-    {
-        getBooks{
-            _id
-            title
-            description
-            imageUrl
-            price
-            author{
-                name
-            }
-        }
-    }
-`
 
-export default graphql(getBooks) (Home)
+
+export default compose(
+    withApollo,
+    graphql(getBooks), 
+) (Home)

@@ -8,7 +8,7 @@ import CartItem from './CartItem/CartItem'
 import emptyCart from './Assets/undraw_empty_cart_co35.svg'
 import Authenticate from './Assets/undraw_authentication_fsn5.svg'
 import querys from '../../Query_Mutation/query'
-import { graphql } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
 import mutation from '../../Query_Mutation/mutation'
 import Aux from '../../HOC/Aux'
 import Button from '../../components/UI/Button/Button'
@@ -24,8 +24,13 @@ class Checkout extends Component{
         }
     }
     componentDidUpdate(prevProps, prevState){
-        if(prevProps.isLoggedIn !== this.props.isLoggedIn ){
+        if(prevProps.isLoggedIn !== this.props.isLoggedIn && this.props.isLoggedIn){
             this.setState({isLoggedIn: this.props.isLoggedIn})
+            this.props.client.query({
+                query: querys.getUserForCart
+            }).then(data => {
+               this.setState({cart: data.data.getUserForCart.cart})
+            })
         }
     }
     static getDerivedStateFromProps(nextProps, prevState){
@@ -38,7 +43,6 @@ class Checkout extends Component{
         }
     }
     componentDidMount(){
-        window.scrollTo(0,0)
        setTimeout(() => {
            if(!this.props.isLoggedIn){
                this.props.showAuth();
@@ -50,7 +54,7 @@ class Checkout extends Component{
             variables:{
                 bookId: _id,
                 quantity: parseInt(quantity)
-            }
+            },
         }).then(res=> {
             this.setState({cart: res.data.changeBookQuantity.cart})
         }).catch(err=> {
@@ -203,6 +207,7 @@ const actionMappedToProps = dispatch => {
 }
 
 export default compose(
+    withApollo,
     connect(stateMappedToProps, actionMappedToProps),
     graphql(querys.getUserForCart),
     graphql(mutation.deleteBookFromCart,{name: "deleteBookFromCart"}),

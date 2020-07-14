@@ -53,12 +53,14 @@
     z-index: 300 !important;
     border-radius: 50%;
     padding: 3px;
+    padding-top: 0;
     font-weight: bolder;
     background-color: #228FC0;
     color:#ffffff ;
     width: 10px;
     height: 10px;
     text-align: center;
+    vertical-align: middle;
 }
 .SigningUp{
         display: none; 

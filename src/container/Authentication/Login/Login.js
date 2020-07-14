@@ -15,7 +15,13 @@ import { connect } from 'react-redux'
 const query = gql`
 query Login($email: String!, $password: String!){
     login(email:$email, password: $password){
-      token
+        token
+        user{
+            _id
+            cart{
+                _id
+            }
+        }
     }
   }
 `
@@ -110,9 +116,9 @@ class Login extends Component{
                 }
             }).then(res => {
                 this.setState({loading: false})
-                const {token} = res.data.login
+                const {token, user} = res.data.login
                 const cart = JSON.parse(localStorage.getItem('cart'))
-                if( cart && cart.cartIds.length > 0){
+                if(cart && cart.cartIds.length > 0){
                     this.props.mutate({
                         variables: {
                             books: cart.cartIds
@@ -121,15 +127,16 @@ class Login extends Component{
                         this.props.updateCart(res.data.logIn)
                     })
                     .catch(err=> {
-                        console.log(err)
+                       
                     })
                 }
                 setInLocalStorage("token", token, 3600000);
                 localStorage.removeItem('cart')
+
                 this.props.login(token)
                 this.setState({formInputs: FORM_INPUTS});
                 this.props.cancel()
-
+                this.props.updateCartNo(user.cart.length)
             }).catch(err=> {
                 this.setState({loading: false})
                 if(err.graphQLErrors){
@@ -212,7 +219,8 @@ const stateMappedToProps = state => {
 const actionsMappedToProps = (dispatch) => {
     return {
         login: (token) => dispatch(actionTypes.login(token)),
-        updateCart: (cart) => dispatch(actionTypes.getCartOnLogin(cart))
+        updateCart: (cart) => dispatch(actionTypes.getCartOnLogin(cart)),
+        updateCartNo : (cartNum)=> dispatch(actionTypes.updateCartNum(cartNum))
     }
 }
 
@@ -220,4 +228,4 @@ export default  compose(
     withApollo,
     graphql(mutations.makeCart),
     connect(stateMappedToProps, actionsMappedToProps)
-    ) (Login)
+) (Login)

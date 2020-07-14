@@ -34,6 +34,7 @@ class Preview extends Component{
                 }
             }).then(data=> {
                 this.props.data.refetch()
+                this.props.updateCartNo(data.data.addToCart.cart.length)
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
@@ -52,7 +53,12 @@ class Preview extends Component{
                     cartIds : [id]
                 }
                 cart = JSON.stringify(cart)
-                localStorage.setItem('cart', cart)
+                localStorage.setItem('cart', cart);
+                this.props.updateCartNo(1)
+                this.props.showCartNotification({
+                    status: "success", 
+                    content: "Book have been added to cart successfully"
+                })
             }else{
                 const exist = cartInLS.cartIds.find(oneId => oneId == id)
                 if(exist){
@@ -68,10 +74,12 @@ class Preview extends Component{
                         status: "success", 
                         content: "Book have been added to cart successfully"
                     })
+                    let cartNo = this.props.cartNo;
+                    cartNo = cartNo + 1
+                    this.props.updateCartNo(cartNo + 1)
                 }
             }
         }
-        console.log(localStorage.getItem('cart'))
     }
     buyBook = (id) => {
         this.props.addToCart(id);
@@ -83,7 +91,7 @@ class Preview extends Component{
                     bookId: id
                 }
             }).then(data=> {
-                this.props.data.refetch();
+                this.props.updateCartNo(data.data.addToCart.cart.length)
                 this.props.showCartNotification({
                     status: "success", 
                     content: "Book have been added to cart successfully"
@@ -214,7 +222,8 @@ const stateMapedToProps = (state)=> {
     return {
         isLoggedIn: state.isLoggedIn,
         imageEndpoint: state.bookImageEndpoint,
-        cart: state.cart
+        cart: state.cart,
+        cartNo: state.numberOfCartElem
     }
 }
 
@@ -222,7 +231,8 @@ const actionsMappedToProps = dispatch => {
     return {
         addToCart : (id) => dispatch(actionTypes.addToCart(id)),
         showAuth : () => dispatch(actionTypes.showAuth()),
-        showCartNotification: (payload) => dispatch(actionTypes.showNotification(payload))
+        showCartNotification: (payload) => dispatch(actionTypes.showNotification(payload)),
+        updateCartNo : (cartNum)=> dispatch(actionTypes.updateCartNum(cartNum))
     }
 }
 
